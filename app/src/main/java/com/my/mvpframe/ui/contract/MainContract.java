@@ -1,5 +1,7 @@
 package com.my.mvpframe.ui.contract;
 
+import com.my.mvpframe.db.User;
+import com.my.mvpframe.db.UserDao;
 import com.my.mvpframe.mvp.base.BasePresenter;
 import com.my.mvpframe.mvp.base.BaseView;
 
@@ -18,6 +20,7 @@ public class MainContract {
     /*定义p层的接口*/
     public abstract static class Presenter extends BasePresenter<View> {
         public abstract void getAreaList();
+        public abstract void getInsertUser(UserDao userDao, User user);
     }
 
 }

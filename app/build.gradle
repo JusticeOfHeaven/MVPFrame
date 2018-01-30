@@ -10,12 +10,23 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //指定ROOM.schemaLocation生成的文件路径
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -41,4 +52,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     // RxLifecycle
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    //Room(Android官方主推orm框架)
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    implementation "android.arch.persistence.room:rxjava2:1.0.0"// ROOM配套RxJava2使用
 }

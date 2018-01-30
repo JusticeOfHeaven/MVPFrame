@@ -2,6 +2,10 @@ package com.my.mvpframe.rxjava;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
+import org.reactivestreams.Publisher;
+
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
@@ -42,6 +46,14 @@ public class RxSchedulers {
                 return observable
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+    public static <T> FlowableTransformer<T, T> composeFlowable() {
+        return new FlowableTransformer<T, T>() {
+            @Override
+            public Publisher<T> apply(Flowable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
             }
         };
     }

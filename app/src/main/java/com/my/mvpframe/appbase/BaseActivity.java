@@ -10,12 +10,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by ZJ on 2018/1/24 0024.
+ * Created by ZJ on 2018/1/24.
+ *
  */
 
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
     public String TAG = getClass().getSimpleName() + "";
-    protected T mPresenter;
+    private T mPresenter;
     public Context mContext;
     private Unbinder unbinder;
 
@@ -31,7 +32,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         //创建presenter
         mPresenter = initPresenter();
         initView();
-        initData();
     }
 
     @Override
@@ -60,11 +60,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected abstract void initView();
     /**
      * 创建Presenter 对象
-     *
-     * @return
      */
     protected abstract T initPresenter();
-    protected abstract void initData();
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -2,3 +2,8 @@
 2018-1-10
 # 此 Demo 框架是 MVP+OkHttp3+RxJava2+Retrofit2 搭建而成，是本作者的一个测试框架的Demo，仅限于学习使用，此后
   会不定时更新完善
+
+# 增加ROOM数据库，2007Google官方推荐使用数据库
+1、所有操作数据库的方法都必须在异步否则会报错
+    java.lang.IllegalStateException: Cannot access database on the main thread since it may potentially
+    lock the UI for a long period of time.
