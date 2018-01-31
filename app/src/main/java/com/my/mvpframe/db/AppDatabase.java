@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 /**
- * Created by ZJ on 2018/1/30.
+ * Created by ZJ register 2018/1/30.
  * entities、version为必须字段
  */
 @Database(entities = {User.class}, version = 1)

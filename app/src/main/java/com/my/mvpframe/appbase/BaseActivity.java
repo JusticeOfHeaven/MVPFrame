@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.my.mvpframe.mvp.base.BasePresenter;
+import com.my.mvpframe.rxbus.RxBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

@@ -4,6 +4,8 @@
   会不定时更新完善
 
 # 增加ROOM数据库，2007Google官方推荐使用数据库
-1、所有操作数据库的方法都必须在异步否则会报错
-    java.lang.IllegalStateException: Cannot access database on the main thread since it may potentially
-    lock the UI for a long period of time.
+  注：所有操作数据库的方法都必须在异步否则会报错
+           java.lang.IllegalStateException: Cannot access database on the main thread since it may potentially
+      lock the UI for a long period of time.
+
+# 增加 基于RxJava2封装的RxBus

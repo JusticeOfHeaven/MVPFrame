@@ -28,7 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by ZJ on 2018/1/29 0029.
+ * Created by ZJ register 2018/1/29 0029.
  */
 
 public class MainPresenter extends MainContract.Presenter {

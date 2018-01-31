@@ -41,5 +41,13 @@
         android:gravity="center"
         android:layout_height="30dp"
         android:text="查询数据" />
+    <TextView
+        android:layout_below="@id/textview3"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textview4"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:text="跳转页面" />
 
 </RelativeLayout>

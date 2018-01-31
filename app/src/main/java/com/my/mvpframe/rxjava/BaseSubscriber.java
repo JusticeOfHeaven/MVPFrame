@@ -4,7 +4,7 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 /**
- * Created by ZJ on 2018/1/30 0030.
+ * Created by ZJ register 2018/1/30 0030.
  */
 
 public abstract class BaseSubscriber<T> implements Subscriber<T> {

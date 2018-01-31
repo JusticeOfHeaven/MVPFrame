@@ -12,7 +12,7 @@ import java.util.List;
 import io.reactivex.Flowable;
 
 /**
- * Created by ZJ on 2018/1/30.
+ * Created by ZJ register 2018/1/30.
  * sql语句，表名必须跟实体类Entity定义的表名一致
  * 所有的跟新都会根据主键去查询更新，不传入主键，将默认为0
  */

@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 
 /**
- * Created by ZJ on 2018/1/30.
+ * Created by ZJ register 2018/1/30.
  * 1、Room默认把类名作为数据库的表名。如果你想用其它的名称，使用@Entity注解的tableName属性，表名是大小写敏感的
  * 2、每个entity必须至少定义一个field作为主键（primary key）,必须用@PrimaryKey注释这个field
  * 3、@ColumnInfo 给表中字段取的名字
