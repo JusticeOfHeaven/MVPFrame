@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.my.mvpframe.mvp.base.BasePresenter;
+import com.my.mvpframe.mvp.base.BaseView;
 import com.my.mvpframe.rxbus.RxBus;
 
 import butterknife.ButterKnife;
@@ -15,7 +16,7 @@ import butterknife.Unbinder;
  *
  */
 
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity{
     public String TAG = getClass().getSimpleName() + "";
     private T mPresenter;
     public Context mContext;

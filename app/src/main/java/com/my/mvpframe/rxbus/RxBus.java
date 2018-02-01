@@ -17,12 +17,12 @@ import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
 
 /**
- * Created by ZJ register 2018/1/31.
+ * Created by ZJ on 2018/1/31.
  * 封装的EventBus，其中processorMapper管理所有的Processor，可以取消指定的tag订阅
- *
+ * <p>
  * FlowableProcessor<Object> mBus = PublishProcessor.create().toSerialized();// 有背压
  * Subject<Object> mBus = PublishSubject.create().toSerialized();// 旧无背压
- *
+ * <p>
  * ======================!!!!!!!!!!! Attention !!!!!!!!!!!========================
  * 特别注意：页面注册的订阅，在页面结束的时候要取消订阅{@link #unRegister(Object tag)}
  * ===============================================================================
@@ -82,12 +82,13 @@ public class RxBus {
         PublishProcessor<T> objectPublishProcessor = PublishProcessor.create();
         FlowableProcessor<T> processor = objectPublishProcessor.toSerialized();
         processorList.add(processor);
-        Disposable disposable = processor.compose(RxSchedulers.composeFlowable()).subscribe(action, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                throwable.printStackTrace();
-            }
-        });
+        Disposable disposable = processor.compose(RxSchedulers.composeFlowable())
+                .subscribe(action, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
     /**

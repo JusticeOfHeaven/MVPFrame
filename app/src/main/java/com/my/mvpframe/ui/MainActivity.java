@@ -1,6 +1,5 @@
 package com.my.mvpframe.ui;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +9,6 @@ import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.db.AppDatabase;
 import com.my.mvpframe.db.User;
 import com.my.mvpframe.db.UserDao;
-import com.my.mvpframe.mvp.base.BasePresenter;
 import com.my.mvpframe.rxbus.RxBus;
 import com.my.mvpframe.rxbus.RxBusConstants;
 import com.my.mvpframe.ui.contract.MainContract;
@@ -20,7 +18,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> implements MainContract.View {
 
     @BindView(R.id.textview)
     TextView textview;
@@ -36,7 +34,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void initView() {
         textview.setOnClickListener(view -> {
-
+            textview.setText("");
         });
 
         RxBus.getIntanceBus().register(RxBusConstants.TYPE_ONE, (Consumer<String>) o -> textview.setText(o));
@@ -46,7 +44,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
-    protected BasePresenter initPresenter() {
+    protected MainPresenter initPresenter() {
         presenter = new MainPresenter(this);
         return presenter;
     }
