@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ChooseTab">
+        <attr name="leftSelectDrawable" format="dimension"/>
+        <attr name="leftUnSelectDrawable" format="dimension"/>
+        <attr name="rightSelectDrawable" format="dimension"/>
+        <attr name="rightUnSelectDrawable" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="selectTextColor" format="color"/>
+        <attr name="unSelectTextColor" format="color"/>
+        <attr name="selectText" format="string"/>
+        <attr name="unSelectText" format="string"/>
+        <attr name="gap" format="dimension"/>
+        <attr name="selectSide" format="boolean"/>
+
+    </declare-styleable>
+</resources>
