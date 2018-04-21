@@ -166,4 +166,31 @@ public class ChooseTab extends LinearLayout {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
+
+
+    /**
+     *  返回选择的是哪一边
+     * @return true 左边  false  右边
+     */
+    public boolean isSelectSide() {
+        return selectSide;
+    }
+
+    /**
+     * 设置选中的是哪一边
+     */
+    public void setSelectSide(boolean selectSide){
+        this.selectSide = selectSide;
+        if (selectSide){
+            leftTextView.setTextColor(selectTextColor);
+            leftTextView.setBackground(leftSelectDrawable);
+            rightTextView.setTextColor(unSelectTextColor);
+            rightTextView.setBackground(rightUnSelectDrawable);
+        }else {
+            rightTextView.setTextColor(selectTextColor);
+            rightTextView.setBackground(rightSelectDrawable);
+            leftTextView.setTextColor(unSelectTextColor);
+            leftTextView.setBackground(leftUnSelectDrawable);
+        }
+    }
 }
