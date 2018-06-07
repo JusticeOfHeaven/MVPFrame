@@ -18,7 +18,10 @@ public abstract class BasePresenter<T> {
         mViewRef = new SoftReference<T>(view);
     }
 
-    protected T getView() {
+    public T getView() {
+        if (mViewRef == null) {
+            return null;
+        }
         return mViewRef.get();
     }
 
