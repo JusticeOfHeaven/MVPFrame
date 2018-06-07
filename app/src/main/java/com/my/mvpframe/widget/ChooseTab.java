@@ -193,4 +193,16 @@ public class ChooseTab extends LinearLayout {
             leftTextView.setBackground(leftUnSelectDrawable);
         }
     }
+    /**
+     * 选中的是不是左边
+     */
+    public boolean isLeft(){
+        return selectSide;
+    }
+    /**
+     * 选中的是不是右边
+     */
+    public boolean isRight(){
+        return !selectSide;
+    }
 }
