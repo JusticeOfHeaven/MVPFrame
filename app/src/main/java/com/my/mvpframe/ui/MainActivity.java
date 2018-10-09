@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
         RxBus.getIntanceBus().register(RxBusConstants.TYPE_TWO, (Consumer<String>) o -> textview.setText(o));
         RxBus.getIntanceBus().register(RxBusConstants.TYPE_THREE, (Consumer<String>) o -> textview.setText(o));
 
+        //新增的分支dev
     }
 
     @Override
