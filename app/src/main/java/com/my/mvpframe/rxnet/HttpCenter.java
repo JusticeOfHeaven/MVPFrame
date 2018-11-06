@@ -1,6 +1,6 @@
 package com.my.mvpframe.rxnet;
 
-import com.my.mvpframe.utils.PublicKetUtils;
+import com.my.mvpframe.utils.PublicKeyUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -60,10 +60,10 @@ public class HttpCenter {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();
-            String timestamp = PublicKetUtils.getTimestamp();
+            String timestamp = PublicKeyUtils.getTimestamp();
             Request build = originalRequest.newBuilder()
                     .addHeader("timestamp", timestamp)
-                    .addHeader("publickey", PublicKetUtils.encryptMD5ToString(timestamp, "sqtapi123456"))
+                    .addHeader("publickey", PublicKeyUtils.encryptMD5ToString(timestamp, "sqtapi123456"))
                     .build();
             return chain.proceed(build);
         }

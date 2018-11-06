@@ -61,9 +61,11 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      */
     protected abstract void initView();
     /**
-     * 创建Presenter 对象
+     * 创建Presenter 对象,需要用的重写
      */
-    protected abstract T initPresenter();
+    protected  T initPresenter(){
+        return null;
+    };
     @Override
     protected void onDestroy() {
         super.onDestroy();

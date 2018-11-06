@@ -26,7 +26,7 @@ import javax.crypto.spec.SecretKeySpec;
  * @aurher Administrator
  */
 
-public class PublicKetUtils {
+public class PublicKeyUtils {
     public static final String PubKEY = "sqtapi123456";
     private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 

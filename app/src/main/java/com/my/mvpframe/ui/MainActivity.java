@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
     @Override
     protected void initView() {
         textview.setOnClickListener(view -> {
-            textview.setText("");
+//            startActivity();
         });
 
         RxBus.getIntanceBus().register(RxBusConstants.TYPE_ONE, (Consumer<String>) o -> textview.setText(o));
