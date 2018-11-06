@@ -1,5 +1,6 @@
 package com.my.mvpframe.ui;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity<MainContract.View,MainPresenter> 
     @Override
     protected void initView() {
         textview.setOnClickListener(view -> {
-//            startActivity();
+            startActivity(new Intent(this,DynamicEffectActivity.class));
         });
 
         RxBus.getIntanceBus().register(RxBusConstants.TYPE_ONE, (Consumer<String>) o -> textview.setText(o));
