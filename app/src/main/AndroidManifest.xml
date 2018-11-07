@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.DynamicEffectActivity" />
+        <activity android:name=".customview.three_d_view.ThreeDViewActivity" />
     </application>
 
 </manifest>

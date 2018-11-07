@@ -5,6 +5,7 @@ package com.my.mvpframe.bean;
  **/
 public class DynamicBean {
     public String name;
-    public String descripte;
+    public String description;
+    public String type;
 
 }
