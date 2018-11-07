@@ -1,6 +1,7 @@
 package com.my.mvpframe.ui;
 
 import android.graphics.Color;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -10,9 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.my.mvpframe.R;
 import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
-import com.my.mvpframe.mvp.base.BasePresenter;
 import com.my.mvpframe.utils.JsonUtils;
-import com.my.mvpframe.widget.DividerGridItemDecoration;
 import com.my.mvpframe.widget.SpaceItemDecoration;
 
 import java.io.BufferedReader;
@@ -40,6 +39,7 @@ public class DynamicEffectActivity extends BaseActivity {
         String json = getData();
         List<DynamicBean> dynamicBeans = (List<DynamicBean>) JsonUtils.fromJson(json, new TypeToken<List<DynamicBean>>(){}.getType());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         recyclerView.addItemDecoration(new SpaceItemDecoration(this, 2,Color.RED));
         recyclerView.setAdapter(new BaseQuickAdapter<DynamicBean,BaseViewHolder>(R.layout.item_text,dynamicBeans) {
 
