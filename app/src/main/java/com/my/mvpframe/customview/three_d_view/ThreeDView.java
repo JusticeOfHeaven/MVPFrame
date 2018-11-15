@@ -67,7 +67,8 @@ public class ThreeDView extends View {
     }
 
     private void init(Context context) {
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+        // 用 R.mipmap 就报错
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
         bitmap = Bitmap.createScaledBitmap(bitmap, BIT_MAP_WIDTH, BIT_MAP_HEIGHT, false);
 
         animHandler = new Handler(new Handler.Callback() {
