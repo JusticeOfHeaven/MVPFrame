@@ -13,6 +13,8 @@ import com.google.gson.reflect.TypeToken;
 import com.my.mvpframe.R;
 import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
+import com.my.mvpframe.customview.BezierCurve.BezierCurveActivity;
+import com.my.mvpframe.customview.BezierView1.DeleteActivity;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
 import com.my.mvpframe.widget.SpaceItemDecoration;
@@ -51,12 +53,7 @@ public class DynamicEffectActivity extends BaseActivity {
             protected void convert(BaseViewHolder helper, DynamicBean item) {
                 helper.setText(R.id.tvTitle, item.name);
 
-                helper.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        onItemClick(item);
-                    }
-                });
+                helper.itemView.setOnClickListener(view -> onItemClick(item));
             }
         });
     }
@@ -65,6 +62,12 @@ public class DynamicEffectActivity extends BaseActivity {
         switch (bean.type) {
             case "0":
                 startActivity(new Intent(this, ThreeDViewActivity.class));
+                break;
+            case "1":
+                startActivity(new Intent(this, BezierCurveActivity.class));
+                break;
+            case "2":
+                startActivity(new Intent(this, DeleteActivity.class));
                 break;
         }
     }

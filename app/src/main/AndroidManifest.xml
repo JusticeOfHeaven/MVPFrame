@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".ui.DynamicEffectActivity" />
         <activity android:name=".customview.three_d_view.ThreeDViewActivity" />
+        <activity android:name=".customview.BezierCurve.BezierCurveActivity" />
+        <activity android:name=".customview.BezierView1.DeleteActivity" />
     </application>
 
 </manifest>

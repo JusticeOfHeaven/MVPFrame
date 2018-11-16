@@ -6,13 +6,13 @@
   },
   {
     "type":"1",
-    "name": "haha",
+    "name": "贝塞尔曲线",
     "description": ""
   },
   {
     "type":"2",
-    "name": "haha",
-    "description": ""
+    "name": "显示删除按钮",
+    "description": "两圆相交出现删除图标"
   },
   {
     "type":"3",
