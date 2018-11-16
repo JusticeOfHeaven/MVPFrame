@@ -27,6 +27,7 @@
         <activity android:name=".customview.three_d_view.ThreeDViewActivity" />
         <activity android:name=".customview.BezierCurve.BezierCurveActivity" />
         <activity android:name=".customview.BezierView1.DeleteActivity" />
+        <activity android:name=".customview.pic_roll.RollViewActivity" />
     </application>
 
 </manifest>

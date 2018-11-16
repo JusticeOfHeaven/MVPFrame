@@ -15,6 +15,7 @@ import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
 import com.my.mvpframe.customview.BezierCurve.BezierCurveActivity;
 import com.my.mvpframe.customview.BezierView1.DeleteActivity;
+import com.my.mvpframe.customview.pic_roll.RollViewActivity;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
 import com.my.mvpframe.widget.SpaceItemDecoration;
@@ -68,6 +69,9 @@ public class DynamicEffectActivity extends BaseActivity {
                 break;
             case "2":
                 startActivity(new Intent(this, DeleteActivity.class));
+                break;
+            case "3":
+                startActivity(new Intent(this, RollViewActivity.class));
                 break;
         }
     }
