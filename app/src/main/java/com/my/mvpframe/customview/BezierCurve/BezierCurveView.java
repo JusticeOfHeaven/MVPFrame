@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+
+import com.my.mvpframe.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,10 @@ public class BezierCurveView extends View {
     private float maxDistance = 400;
     private GestureDetector gestureDetector;
     private float dragRadius;
+    private int touchSlop;
+    private float downX;
+    private float downY;
+    private boolean isOutRange;
 
     public BezierCurveView(Context context) {
         this(context, null);
@@ -55,6 +62,8 @@ public class BezierCurveView extends View {
 
     private void init(Context context) {
         gestureDetector = new GestureDetector(context, listener);
+        touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
 
@@ -94,23 +103,26 @@ public class BezierCurveView extends View {
         //2、获取控制点坐标
         this.mControlPoint = getMiddlePoint(mDragCircle, mFixedCircle);
         // 画两个半圆
-        canvas.drawCircle(mFixedCircle.x, mFixedCircle.y, fixRadius, paint);
         canvas.drawCircle(mDragCircle.x, mDragCircle.y, dragRadius, paint);
 
-        canvas.save();
-        //画连接部分   这个是用的那个贝塞尔曲线绘制的连接部分
-        path.reset();
-        //跳到某个点1
-        path.moveTo(mFixedPoints.get(0).x, mFixedPoints.get(0).y);
-        //画曲线 1--->2
-        path.quadTo(mControlPoint.x, mControlPoint.y, mDragPoints.get(1).x, mDragPoints.get(1).y);
-        //画直线2---->3
-        path.lineTo(mDragPoints.get(0).x, mDragPoints.get(0).y);
-        //画曲线3---->4
-        path.quadTo(mControlPoint.x, mControlPoint.y, mFixedPoints.get(1).x, mFixedPoints.get(1).y);
-        path.close();
-        canvas.drawPath(path, paint);
-        canvas.restore();
+        if (!isOutRange) {
+            canvas.drawCircle(mFixedCircle.x, mFixedCircle.y, fixRadius, paint);
+
+            canvas.save();
+            //画连接部分   这个是用的那个贝塞尔曲线绘制的连接部分
+            path.reset();
+            //跳到某个点1
+            path.moveTo(mFixedPoints.get(0).x, mFixedPoints.get(0).y);
+            //画曲线 1--->2
+            path.quadTo(mControlPoint.x, mControlPoint.y, mDragPoints.get(1).x, mDragPoints.get(1).y);
+            //画直线2---->3
+            path.lineTo(mDragPoints.get(0).x, mDragPoints.get(0).y);
+            //画曲线3---->4
+            path.quadTo(mControlPoint.x, mControlPoint.y, mFixedPoints.get(1).x, mFixedPoints.get(1).y);
+            path.close();
+            canvas.drawPath(path, paint);
+            canvas.restore();
+        }
 
         // 画最大距离的那个圆
         drawBigDistance(canvas);
@@ -141,20 +153,36 @@ public class BezierCurveView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        gestureDetector.onTouchEvent(event);
-//        switch (event.getActionMasked()) {
-//            case MotionEvent.ACTION_DOWN:
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                float x = event.getX();
-//                float y = event.getY();
-//                float distanceBetween2Points = getDistanceBetween2Points(mFixedCircle, x, y);
-//                if (distanceBetween2Points >= maxDistance) {
-//
-//                }
-//                updateDragCircle(x, y);
-//                break;
-//        }
+//        gestureDetector.onTouchEvent(event);
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.i("TAG","DOWN");
+                downX = event.getX();
+                downY = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float x = event.getX();
+                float y = event.getY();
+                if (Math.abs(x - downX) >= touchSlop || Math.abs(y - downY) >= touchSlop) {
+                    float distanceBetween2Points = getDistanceBetween2Points(mFixedCircle, x, y);
+                    Float evaluate = evaluate(0.5f, distanceBetween2Points, maxDistance);
+                    if (distanceBetween2Points <= maxDistance) {
+                        isOutRange = false;
+                        fixRadius = (maxDistance - distanceBetween2Points) * dragRadius / maxDistance;
+                    } else {
+                        isOutRange = true;
+                    }
+                    updateDragCircle(evaluate,x, y);
+
+                    // 记录位置
+                    downX = Math.abs(x - downX);
+                    downY = Math.abs(x - downY);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+            Log.i("TAG","UP");
+            break;
+        }
 
         return true;
     }
@@ -194,7 +222,7 @@ public class BezierCurveView extends View {
         ArrayList<PointF> list = new ArrayList<>();
         float sin = (mFixedCircle.x - mDragCircle.x) / distance;
         float cos = (mFixedCircle.y - mDragCircle.y) / distance;
-        Log.e("TAG", "sin = " + sin + " , cos = " + cos);
+//        Log.e("TAG", "sin = " + sin + " , cos = " + cos);
         list.add(new PointF(mFixedCircle.x + radius * cos, (mFixedCircle.y - radius * sin)));
         list.add(new PointF(mFixedCircle.x - radius * cos, (mFixedCircle.y + radius * sin)));
         return list;
