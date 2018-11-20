@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#9dffffff"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/portrait"
+            android:background="@color/colorPrimary"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="24px"
+            android:layout_width="98px"
+            android:layout_height="98px" />
+        <TextView
+            android:id="@+id/names"
+            android:layout_marginTop="30px"
+            android:text="Marks"
+            android:layout_toRightOf="@id/portrait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/content"
+            android:text="看电视，玩游戏"
+            android:layout_toRightOf="@id/portrait"
+            android:layout_below="@id/names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/times"
+            android:text="2018/02/06"
+            android:layout_marginRight="44px"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/portrait"
+            android:layout_below="@id/names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieView"
+            android:layout_width="144px"
+            android:layout_alignParentRight="true"
+            android:layout_height="170px"
+            android:layout_marginRight="-100px"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="delete.json"
+            app:lottie_loop="false" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

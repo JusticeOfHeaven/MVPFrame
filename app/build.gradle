@@ -62,4 +62,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     // BaseAdapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
+    api 'com.airbnb.android:lottie:2.6.1'
 }

@@ -15,6 +15,8 @@ import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
 import com.my.mvpframe.customview.BezierCurve.BezierCurveActivity;
 import com.my.mvpframe.customview.BezierView1.DeleteActivity;
+import com.my.mvpframe.customview.collsion.CollsionActivity;
+import com.my.mvpframe.customview.delete.ScrollDeleteActivity;
 import com.my.mvpframe.customview.pic_roll.RollViewActivity;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
@@ -72,6 +74,12 @@ public class DynamicEffectActivity extends BaseActivity {
                 break;
             case "3":
                 startActivity(new Intent(this, RollViewActivity.class));
+                break;
+            case "4":
+                startActivity(new Intent(this, CollsionActivity.class));
+                break;
+            case "5":
+                startActivity(new Intent(this, ScrollDeleteActivity.class));
                 break;
         }
     }

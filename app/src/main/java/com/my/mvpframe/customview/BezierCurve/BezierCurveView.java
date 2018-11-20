@@ -91,7 +91,7 @@ public class BezierCurveView extends View {
 //        fixRadius = width/2-50;
         fixRadius =  dragRadius = 50;
         mFixedCircle = new PointF(width / 2, height / 2);
-        mDragCircle = new PointF(width / 2, height - 50);
+        mDragCircle = new PointF(width / 2, height /2+maxDistance);
     }
 
     @Override

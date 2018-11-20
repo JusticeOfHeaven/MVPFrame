@@ -28,6 +28,8 @@
         <activity android:name=".customview.BezierCurve.BezierCurveActivity" />
         <activity android:name=".customview.BezierView1.DeleteActivity" />
         <activity android:name=".customview.pic_roll.RollViewActivity" />
+        <activity android:name=".customview.collsion.CollsionActivity" />
+        <activity android:name=".customview.delete.ScrollDeleteActivity" />
     </application>
 
 </manifest>
