@@ -13,6 +13,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Scroller;
 
 import com.my.mvpframe.ui.MainActivity;
 
@@ -46,6 +48,7 @@ public class BezierCurveView extends View {
     private float downX;
     private float downY;
     private boolean isOutRange;
+    private Scroller mScroller;
 
     public BezierCurveView(Context context) {
         this(context, null);
@@ -63,6 +66,7 @@ public class BezierCurveView extends View {
     private void init(Context context) {
         gestureDetector = new GestureDetector(context, listener);
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mScroller = new Scroller(context, new DecelerateInterpolator());
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
@@ -145,7 +149,7 @@ public class BezierCurveView extends View {
             if (distanceBetween2Points <= maxDistance) {
                 fixRadius = (maxDistance-distanceBetween2Points)*dragRadius/maxDistance;
             }
-            updateDragCircle(evaluate,x, y);
+            updateDragCircle(x, y);
 
             return true;
         }
@@ -165,14 +169,14 @@ public class BezierCurveView extends View {
                 float y = event.getY();
                 if (Math.abs(x - downX) >= touchSlop || Math.abs(y - downY) >= touchSlop) {
                     float distanceBetween2Points = getDistanceBetween2Points(mFixedCircle, x, y);
-                    Float evaluate = evaluate(0.5f, distanceBetween2Points, maxDistance);
+                    Float evaluate = evaluate(0.8f, distanceBetween2Points, maxDistance);
                     if (distanceBetween2Points <= maxDistance) {
                         isOutRange = false;
                         fixRadius = (maxDistance - distanceBetween2Points) * dragRadius / maxDistance;
                     } else {
                         isOutRange = true;
                     }
-                    updateDragCircle(evaluate,x, y);
+                    updateDragCircle(x, y);
 
                     // 记录位置
                     downX = Math.abs(x - downX);
@@ -181,13 +185,27 @@ public class BezierCurveView extends View {
                 break;
             case MotionEvent.ACTION_UP:
             Log.i("TAG","UP");
+                if (isOutRange) {
+//                    mScroller.startScroll();
+//                    scrollTo((int) mFixedCircle.x,(int)mFixedCircle.y);
+                    updateDragCircle(mFixedCircle.x, mFixedCircle.y);
+                }
             break;
         }
 
         return true;
     }
 
-    private void updateDragCircle(Float evaluate, float x, float y) {
+    @Override
+    public void computeScroll() {
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            invalidate();
+        }
+        super.computeScroll();
+    }
+
+    private void updateDragCircle( float x, float y) {
         mDragCircle.x = x;
         mDragCircle.y = y;
         invalidate();
