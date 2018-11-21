@@ -42,6 +42,7 @@ public class ScrollDeleteView extends FrameLayout {
     private LinearLayout llLottie;
     private int lottieOriginLeft;
     private float totalProgress = 0.97f;
+    private View view;
 
     public ScrollDeleteView(Context context) {
         this(context, null);
@@ -59,7 +60,7 @@ public class ScrollDeleteView extends FrameLayout {
     private void init(Context context) {
 //        Log.i("TAG","init");
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        View view = LayoutInflater.from(context).inflate(R.layout.item_demo, null, false);
+        view = LayoutInflater.from(context).inflate(R.layout.item_demo, null, false);
         lottieView = view.findViewById(R.id.lottieView);
         llLottie = view.findViewById(R.id.llLottie);
 
