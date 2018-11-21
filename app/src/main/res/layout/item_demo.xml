@@ -44,16 +44,23 @@
             android:layout_height="wrap_content" />
 
 
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llLottie"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottieView"
             android:layout_width="144px"
-            android:layout_alignParentRight="true"
             android:layout_height="170px"
-            android:layout_marginRight="-100px"
             app:lottie_autoPlay="false"
             app:lottie_fileName="delete.json"
             app:lottie_loop="false" />
+    </LinearLayout>
 
-    </RelativeLayout>
+
+
 
 </RelativeLayout>

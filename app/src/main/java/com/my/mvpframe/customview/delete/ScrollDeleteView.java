@@ -2,6 +2,8 @@ package com.my.mvpframe.customview.delete;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,10 +14,12 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.my.mvpframe.R;
+
 
 /**
  * Created by jzhan on 2018/11/20.
@@ -28,10 +32,16 @@ public class ScrollDeleteView extends FrameLayout {
     private RelativeLayout rlContent;
     private VelocityTracker mVelocityTracker;
     private int width;
-    private int leftDistance = dp2px(30f);
+    private int leftDistance = dp2px(38f);
+    private int rightMargin = dp2px(25f);
     private boolean isLottieFinish;
     private float X_CONSTANT = 50;
     private int lastDownX;
+    private int sumX = 0;
+    private LinearLayout.LayoutParams layoutParams;
+    private LinearLayout llLottie;
+    private int lottieOriginLeft;
+    private float totalProgress = 0.97f;
 
     public ScrollDeleteView(Context context) {
         this(context, null);
@@ -47,25 +57,28 @@ public class ScrollDeleteView extends FrameLayout {
     }
 
     private void init(Context context) {
-        Log.i("TAG","init");
+//        Log.i("TAG","init");
         touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         View view = LayoutInflater.from(context).inflate(R.layout.item_demo, null, false);
         lottieView = view.findViewById(R.id.lottieView);
-//        lottieView.animate().translationX(-lottieView.getMeasuredWidth()/2).start();
+        llLottie = view.findViewById(R.id.llLottie);
+
+        layoutParams = (LinearLayout.LayoutParams) lottieView.getLayoutParams();
+        layoutParams.rightMargin = -rightMargin;
+        lottieView.setLayoutParams(layoutParams);
         rlContent = view.findViewById(R.id.rlContent);
         addView(view);
+        
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.i("TAG","onSizeChanged");
+//        Log.i("TAG","onSizeChanged");
         width = w;
-        int i = lottieView.getMeasuredWidth() / 2 + width;
-
+        lottieOriginLeft = width - lottieView.getMeasuredWidth() - rightMargin;
     }
 
-    int sumX = 0;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         initVelocityTrackerIfNotExists();
@@ -94,11 +107,16 @@ public class ScrollDeleteView extends FrameLayout {
                 if (this.sumX >= leftDistance) {
                     this.sumX = leftDistance;
                 }
-                float fraction = this.sumX * 0.034f / leftDistance;
-
-                Log.i("TAG","fraction = "+fraction+", sumx = "+ this.sumX);
+                float fraction = this.sumX * totalProgress / leftDistance;//lottie进度
+                // lottie移动距离
+                int i = sumX * rightMargin / leftDistance;
+//                Log.i("TAG", "i = " + i);
                 lottieView.setProgress(fraction);
+
                 upDateContentLayout(dx);
+                upDateLottieLayout(i);
+
+
                 lastDownX = (int) x;
                 break;
             case MotionEvent.ACTION_UP:
@@ -112,23 +130,35 @@ public class ScrollDeleteView extends FrameLayout {
                     lottieView.setProgress(0f);
                     rlContent.setLeft(0);
                     rlContent.setRight(width);
+                    llLottie.setLeft(lottieOriginLeft + rightMargin * 2);
+                    llLottie.setRight(width);
                 } else if (xVelocity <= 0 && Math.abs(xVelocity) >= X_CONSTANT) {
                     // 向左滑
 //                    Log.i("TAG", "向左滑");
                     this.sumX = leftDistance;
-                    lottieView.setProgress(0.034f);
+                    lottieView.setProgress(totalProgress);
                     rlContent.setLeft(-leftDistance);
                     rlContent.setRight(width);
+                    llLottie.setLeft(lottieOriginLeft + rightMargin);
+                    llLottie.setRight(width);
                 } else {
                     this.sumX = 0;
                     lottieView.setProgress(0f);
                     rlContent.setLeft(0);
                     rlContent.setRight(width);
+                    llLottie.setLeft(lottieOriginLeft + rightMargin * 2);
+                    llLottie.setRight(width);
                 }
                 recycleVelocityTracker();
                 break;
         }
         return true;
+    }
+
+    private void upDateLottieLayout(int dx) {
+        int lastLeft = lottieOriginLeft + rightMargin * 2-dx;
+        llLottie.setLeft(lastLeft);
+        llLottie.setRight(width);
     }
 
     private void upDateContentLayout(int dx) {
@@ -150,7 +180,7 @@ public class ScrollDeleteView extends FrameLayout {
         if (lastRight >= width) {
             lastRight = width;
         }
-        Log.i("TAG", "left = " + lastLeft + " , right = " + lastRight);
+//        Log.i("TAG", "left = " + lastLeft + " , right = " + lastRight);
         rlContent.setLeft(lastLeft);
         rlContent.setRight(width);
     }
