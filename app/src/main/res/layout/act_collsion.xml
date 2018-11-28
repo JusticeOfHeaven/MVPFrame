@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.my.mvpframe.customview.collsion.BallCollisionView
+    <com.my.mvpframe.customview.collsion.MyCollisionView
         android:id="@+id/collsionView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

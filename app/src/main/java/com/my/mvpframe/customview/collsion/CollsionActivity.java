@@ -18,13 +18,18 @@ public class CollsionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_collsion);
 
-        BallCollisionView collsionView = findViewById(R.id.collsionView);
-        ArrayList<TaskModel> list = new ArrayList<>();
-        list.add(new TaskModel("1","1","1"));
-        list.add(new TaskModel("2","2","2"));
-        list.add(new TaskModel("3","3","3"));
-        list.add(new TaskModel("4","4","4"));
-        list.add(new TaskModel("5","5","5"));
-        collsionView.setData(list);
+//        BallCollisionView collsionView = findViewById(R.id.collsionView);
+//        ArrayList<TaskModel> list = new ArrayList<>();
+//        list.add(new TaskModel("1","1","1"));
+//        list.add(new TaskModel("2","2","2"));
+//        list.add(new TaskModel("3","3","3"));
+//        list.add(new TaskModel("4","4","4"));
+//        list.add(new TaskModel("5","5","5"));
+//        list.add(new TaskModel("1","1","1"));
+//        list.add(new TaskModel("2","2","2"));
+//        list.add(new TaskModel("3","3","3"));
+//        list.add(new TaskModel("4","4","4"));
+//        list.add(new TaskModel("5","5","5"));
+//        collsionView.setData(list);
     }
 }
