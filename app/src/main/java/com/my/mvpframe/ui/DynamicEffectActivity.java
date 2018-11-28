@@ -15,6 +15,7 @@ import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
 import com.my.mvpframe.customview.BezierCurve.BezierCurveActivity;
 import com.my.mvpframe.customview.BezierView1.DeleteActivity;
+import com.my.mvpframe.customview.breathview.BreathActivity;
 import com.my.mvpframe.customview.collsion.CollsionActivity;
 import com.my.mvpframe.customview.delete.ScrollDeleteActivity;
 import com.my.mvpframe.customview.pic_roll.RollViewActivity;
@@ -55,6 +56,7 @@ public class DynamicEffectActivity extends BaseActivity {
             @Override
             protected void convert(BaseViewHolder helper, DynamicBean item) {
                 helper.setText(R.id.tvTitle, item.name);
+                helper.setText(R.id.tvDescribe, item.description);
 
                 helper.itemView.setOnClickListener(view -> onItemClick(item));
             }
@@ -80,6 +82,9 @@ public class DynamicEffectActivity extends BaseActivity {
                 break;
             case "5":
                 startActivity(new Intent(this, ScrollDeleteActivity.class));
+                break;
+            case "6":
+                startActivity(new Intent(this, BreathActivity.class));
                 break;
         }
     }

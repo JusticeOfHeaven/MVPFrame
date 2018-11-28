@@ -14,4 +14,8 @@
         <attr name="selectSide" format="boolean"/>
 
     </declare-styleable>
+    <declare-styleable name="BreathView">
+        <attr name="breathDrawable" format="dimension"/>
+        <attr name="bigCircleRadius" format="dimension"/>
+    </declare-styleable>
 </resources>
