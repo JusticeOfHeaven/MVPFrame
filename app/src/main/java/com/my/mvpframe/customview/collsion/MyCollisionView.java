@@ -21,11 +21,11 @@ public class MyCollisionView extends View {
     private List<Ball> list = new ArrayList<>();
 
     public MyCollisionView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public MyCollisionView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public MyCollisionView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -37,6 +37,11 @@ public class MyCollisionView extends View {
         ball = new Ball().create();
         ball1 = new Ball().create();
 
+        ball.x = 200;
+        ball.y = 200;
+
+        ball1.x = 200;
+        ball1.y = 600;
         list.add(ball);
         list.add(ball1);
     }
@@ -52,11 +57,13 @@ public class MyCollisionView extends View {
         super.onDraw(canvas);
         long startTime = System.currentTimeMillis();
 
-        canvas.drawCircle(ball.x,ball.y,ball.radius,ball.paint);
-        collisionEdge();
-        calculateCollision();
-        ball.move();
-
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            canvas.drawCircle(list.get(i).x, list.get(i).y, list.get(i).radius, list.get(i).paint);
+            collisionEdge(list.get(i));
+            calculateCollision(list.get(i));
+            list.get(i).move();
+        }
 
 
         long stopTime = System.currentTimeMillis();
@@ -65,14 +72,30 @@ public class MyCollisionView extends View {
         postInvalidateDelayed(Math.abs(runTime - 20));
     }
 
-    private void calculateCollision() {
+    private void calculateCollision(Ball currentBall) {
         int size = list.size();
         for (int i = 0; i < size; i++) {
             Ball ball = list.get(i);
+            // 计算圆心距离
+            double sqrt = Math.sqrt(Math.pow(Math.abs(currentBall.x - ball.x), 2) + Math.pow(Math.abs(currentBall.y - ball.y), 2));
+            if (sqrt <= currentBall.radius + ball.radius) {
+                // 计算碰撞之后的速度
+                if (ball.vx > 0 && currentBall.vx > 0) {
+                    ball.vy = -ball.vy;
+                    currentBall.vy = -currentBall.vy;
+                } else if (ball.vy > 0 && currentBall.vy > 0) {
+                    ball.vx = -ball.vx;
+                    currentBall.vx = -currentBall.vx;
+                }
+                ball.vx = -ball.vx;
+                ball.vy = -ball.vy;
+                currentBall.vx = -currentBall.vx;
+                currentBall.vy = -currentBall.vy;
+            }
         }
     }
 
-    private void collisionEdge() {
+    private void collisionEdge(Ball ball) {
         // 判断是否到边界
         int left = getLeft();
         int top = getTop();
@@ -93,7 +116,7 @@ public class MyCollisionView extends View {
         }
     }
 
-    private class Ball{
+    private class Ball {
         private Paint paint;
         private float radius;
         private float x;
@@ -101,15 +124,15 @@ public class MyCollisionView extends View {
         private float vx;
         private float vy;
 
-        public Ball create(){
+        public Ball create() {
             paint = new Paint(Paint.ANTI_ALIAS_FLAG);
             paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeWidth(2);
             paint.setColor(Color.RED);
 
             radius = 100;
-            x = (float) (Math.random()*100+300);
-            y = (float) (Math.random()*100+300);
+            x = (float) (Math.random() * 100 + 300);
+            y = (float) (Math.random() * 100 + 300);
             vx = 10;
             vy = 10;
             return this;
@@ -119,17 +142,21 @@ public class MyCollisionView extends View {
             x += vx;
             y += vy;
         }
-        public int left(){
-            return (int) (x-radius);
+
+        public int left() {
+            return (int) (x - radius);
         }
-        public int top(){
-            return (int) (y-radius);
+
+        public int top() {
+            return (int) (y - radius);
         }
-        public int right(){
-            return (int) (x+radius);
+
+        public int right() {
+            return (int) (x + radius);
         }
-        public int bottom(){
-            return (int) (y+radius);
+
+        public int bottom() {
+            return (int) (y + radius);
         }
 
     }
