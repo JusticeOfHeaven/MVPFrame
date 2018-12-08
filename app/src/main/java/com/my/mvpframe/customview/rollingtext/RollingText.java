@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  */
 public class RollingText extends View {
     private String orderList = "0123456789";
-    private String rollText = "43251";
+    private String rollText = "9876543210";
     private Paint textPaint;
     private float bottom;
     private float top;
@@ -60,6 +60,11 @@ public class RollingText extends View {
         textHeight = (int) (bottom - top);
 
 
+        initRollText();
+
+    }
+
+    private void initRollText() {
         int length = rollText.length();
         if (length == 1) {
             rollText = "00" + rollText;
@@ -70,7 +75,6 @@ public class RollingText extends View {
         for (int i = 0; i < finalLength; i++) {
             array.append(i, new AssistBean(String.valueOf(rollText.charAt(i))));// 记录每一个数字，好计算每个数字的平移速度
         }
-
     }
 
     @Override
@@ -105,7 +109,7 @@ public class RollingText extends View {
     private void rollingText(Canvas canvas, String substring, int position) {
         int length = substring.length();
         canvas.save();
-
+        Log.e("TAG", "position = " + position + "translate = " + array.get(position).translateY);
 //        if (-translateY >= (textHeight * (length - 1)) && array.indexOfKey(position) < 0) {
 //            array.append(position, new AssistBean(length - 1, -(textHeight * (length - 1))));
 //        }
@@ -139,6 +143,7 @@ public class RollingText extends View {
 
     public void start() {
         array.clear();
+        initRollText();
         begin();
     }
 
@@ -192,7 +197,7 @@ public class RollingText extends View {
     }
 
     // 获取每一个数字运动的总时长
-    private float getFinalTime(String num){
+    private float getFinalTime(String num) {
         return Integer.parseInt(num);
     }
 
@@ -217,12 +222,67 @@ public class RollingText extends View {
                 case "0":
                     translateY = 0;
                     break;
-                default:
-                    if (x < 1) {
-                        translateY = (int) (getInterpolation(2, x) * getFinalY(text));
-                        x = getFinalY(text)/getFinalTime(text);
-                    } else {
-                        translateY = getFinalY(text);
+                case "1":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.09f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "2":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.08f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "3":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.07f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "4":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.06f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "5":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.05f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "6":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.04f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "7":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.03f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "8":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.02f;
+                    if (x >= 1) {
+                        x = 1f;
+                    }
+                    break;
+                case "9":
+                    translateY = (int) (getFinalY(text)*getInterpolation(2, x));
+                    x += 0.01f;
+                    if (x >= 1) {
+                        x = 1f;
                     }
                     break;
             }
