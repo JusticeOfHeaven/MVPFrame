@@ -15,10 +15,15 @@ import com.my.mvpframe.appbase.BaseActivity;
 import com.my.mvpframe.bean.DynamicBean;
 import com.my.mvpframe.customview.BezierCurve.BezierCurveActivity;
 import com.my.mvpframe.customview.BezierView1.DeleteActivity;
+import com.my.mvpframe.customview.QQMessage.QQMessageActivity;
 import com.my.mvpframe.customview.breathview.BreathActivity;
 import com.my.mvpframe.customview.collsion.CollsionActivity;
 import com.my.mvpframe.customview.delete.ScrollDeleteActivity;
 import com.my.mvpframe.customview.pic_roll.RollViewActivity;
+import com.my.mvpframe.customview.qq_message.QQMessage1Activity;
+import com.my.mvpframe.customview.qq_message_1.DemoActivity;
+import com.my.mvpframe.customview.qq_message_2.QQMessage2Act;
+import com.my.mvpframe.customview.rollingtext.RollingTextAct;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
 import com.my.mvpframe.widget.SpaceItemDecoration;
@@ -85,6 +90,21 @@ public class DynamicEffectActivity extends BaseActivity {
                 break;
             case "6":
                 startActivity(new Intent(this, BreathActivity.class));
+                break;
+            case "7":
+                startActivity(new Intent(this, RollingTextAct.class));
+                break;
+            case "8":
+                startActivity(new Intent(this, QQMessageActivity.class));
+                break;
+            case "9":
+                startActivity(new Intent(this, QQMessage1Activity.class));
+                break;
+            case "10":
+                startActivity(new Intent(this, DemoActivity.class));
+                break;
+            case "11":
+                startActivity(new Intent(this, QQMessage2Act.class));
                 break;
         }
     }
