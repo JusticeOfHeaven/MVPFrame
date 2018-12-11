@@ -23,6 +23,8 @@ import com.my.mvpframe.customview.pic_roll.RollViewActivity;
 import com.my.mvpframe.customview.qq_message.QQMessage1Activity;
 import com.my.mvpframe.customview.qq_message_1.DemoActivity;
 import com.my.mvpframe.customview.qq_message_2.QQMessage2Act;
+import com.my.mvpframe.customview.qq_message_3.TipsViewActivity;
+import com.my.mvpframe.customview.qq_message_4.QQMessage4Activity;
 import com.my.mvpframe.customview.rollingtext.RollingTextAct;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
@@ -105,6 +107,12 @@ public class DynamicEffectActivity extends BaseActivity {
                 break;
             case "11":
                 startActivity(new Intent(this, QQMessage2Act.class));
+                break;
+            case "12":
+                startActivity(new Intent(this, TipsViewActivity.class));
+                break;
+            case "13":
+                startActivity(new Intent(this, QQMessage4Activity.class));
                 break;
         }
     }

@@ -174,7 +174,7 @@ public class MsgXlListView extends InfoListView implements OnScrollListener {
 	/**
 	 * set last refresh time
 	 * 
-	 * @param time
+	 * @param
 	 */
 	// public void setRefreshTime(String time) {
 	// mHeaderTimeView.setText(time);

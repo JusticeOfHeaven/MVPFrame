@@ -58,5 +58,15 @@
     "type":"11",
     "name": "QQ消息界面(3)",
     "description": ""
+  },
+  {
+    "type":"12",
+    "name": "QQ消息界面(4)",
+    "description": ""
+  },
+  {
+    "type":"13",
+    "name": "QQ消息界面(5)",
+    "description": ""
   }
 ]

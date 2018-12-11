@@ -40,6 +40,8 @@
         <activity android:name=".customview.qq_message.QQMessage1Activity" />
         <activity android:name=".customview.qq_message_1.DemoActivity" />
         <activity android:name=".customview.qq_message_2.QQMessage2Act" />
+        <activity android:name=".customview.qq_message_3.TipsViewActivity" />
+        <activity android:name=".customview.qq_message_4.QQMessage4Activity" />
     </application>
 
 </manifest>

@@ -22,4 +22,14 @@
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="RollingText">
+        <attr name="rollTextSize" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="TabItemView">
+        <attr name="item_icon" format="reference"/>
+        <attr name="item_color" format="color"/>
+        <attr name="text" format="string"/>
+        <attr name="text_size" format="dimension"/>
+    </declare-styleable>
 </resources>

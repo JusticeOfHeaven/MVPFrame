@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
 
     <com.my.mvpframe.customview.rollingtext.RollingText
         android:id="@+id/rollingText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_width="wrap_content"
+        app:rollTextSize="25dp"
+        android:layout_height="25dp" />
 
     <EditText
         android:id="@+id/editText"
