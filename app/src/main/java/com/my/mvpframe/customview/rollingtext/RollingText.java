@@ -93,7 +93,7 @@ public class RollingText extends View {
         int finalLength = rollText.length();
 //        array.clear();
         for (int i = finalLength - 1; i >= 0; i--) {
-            array.append(i, new AssistBean(String.valueOf(rollText.charAt(i))));// 记录每一个数字，好计算每个数字的平移速度
+            array.append(i, new AssistBean(String.valueOf(rollText.charAt(i)),i));// 记录每一个数字，好计算每个数字的平移速度
         }
         getMaxWordAndPosition(rollText);
 //        Log.i("TAG",array.toString());
@@ -117,7 +117,16 @@ public class RollingText extends View {
         for (int i = finalLength - 1; i >= 0; i--) {
             char charAt = rollText.charAt(i);
             int indexOf = orderList.indexOf(charAt);
-            String substring = orderList.substring(0, indexOf + 1);
+            String substring;
+//            if (TextUtils.equals("0", String.valueOf(charAt))) {// 这个情况是9变0
+                substring = orderList;
+//            } else {
+//                if (indexOf + 2 > orderList.length() - 1) {
+//                    substring = orderList;
+//                } else {
+//                    substring = orderList.substring(0, indexOf + 2);
+//                }
+//            }
 //            Log.i("TAG", "charAt = " + charAt + "   subString = " + substring);
             rollingText(canvas, substring, i);
 //            Log.i("TAG","i = "+i+"  position = "+(finalLength-1-i)+"   chartAt = "+charAt);
@@ -184,14 +193,17 @@ public class RollingText extends View {
                         array.get(i).x = 0;// 重置x
 //                        }
                     }
-                    Log.i("TAG",array.toString());
+//                    Log.i("TAG",array.toString());
                 } else {
                     // 位数不相等
-
+                    for (int i = newLength - 1; i >= 0; i--) {
+                        array.append(i, new AssistBean(String.valueOf(rollText.charAt(i)),i));// 记录每一个数字，好计算每个数字的平移速度
+                    }
                 }
             }
 
             this.rollText = rollText;
+            getMaxWordAndPosition(this.rollText);
         }
     }
 
@@ -255,6 +267,11 @@ public class RollingText extends View {
             this.text = text;
         }
 
+        public AssistBean(String text, int drawTextPosition) {
+            this.text = text;
+            this.drawTextPosition = drawTextPosition;
+        }
+
         public AssistBean(int drawTextPosition, int translateY) {
             this.drawTextPosition = drawTextPosition;
             this.translateY = translateY;
@@ -272,13 +289,13 @@ public class RollingText extends View {
             } else if (x <= 0) {
                 x = 0f;
             }
-
             switch (text) {
                 case "0":
-                    getTranslateY();
                     // 变成"0"，要把translateY改成0，这样就能无限循环了
                     if (x == 1f) {
                         translateY = 0;
+                    }else {
+                        getTranslateY();
                     }
 
                     x += 0.1f;
@@ -331,8 +348,20 @@ public class RollingText extends View {
                 translateY = (int) (getFinalY(text) * getInterpolation(1.8f, x));
             } else if (Integer.parseInt(newText) >= Integer.parseInt(text)) {// 新数比旧数大 translateY要增加
                 translateY = (int) ((getFinalY(newText) - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
-            } else {// 新数比旧数小，translateY要减小
-                translateY = (int) ((getFinalY(newText) - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
+
+            } else {
+                if (Integer.parseInt(newText) == 0 && Integer.parseInt(text) == 9) {// 这种情况是  9 --> 0
+                    translateY = (int) ((getFinalY("10") - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
+                }else{
+                    if (Integer.parseInt(newText) < Integer.parseInt(text)){// 新数比旧数小，translateY要减小
+                        translateY = (int) ((getFinalY(newText) - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
+//                Log.i("TAG","减少Y = "+translateY);
+                    }
+                }
+            }
+
+            if (drawTextPosition == 2) {
+                Log.i("TAG","Y = "+translateY+"   x = "+x+"  text = "+text+"   newText = "+newText);
             }
 
         }
