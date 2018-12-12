@@ -40,6 +40,7 @@ public class RollingText extends View {
     private Paint.FontMetrics fontMetrics;
     private boolean isRollAnimEnd = false;
     private boolean isBigger = true;
+    private int count = 50;//定位50是因为当数字从0到9，所需次数就是50次，能保证所有的平移都执行完毕
 
     public RollingText(Context context) {
         this(context, null);
@@ -93,7 +94,7 @@ public class RollingText extends View {
         int finalLength = rollText.length();
 //        array.clear();
         for (int i = finalLength - 1; i >= 0; i--) {
-            array.append(i, new AssistBean(String.valueOf(rollText.charAt(i)),i));// 记录每一个数字，好计算每个数字的平移速度
+            array.append(i, new AssistBean(String.valueOf(rollText.charAt(i)), i));// 记录每一个数字，好计算每个数字的平移速度
         }
         getMaxWordAndPosition(rollText);
 //        Log.i("TAG",array.toString());
@@ -115,18 +116,9 @@ public class RollingText extends View {
         }
         int finalLength = rollText.length();
         for (int i = finalLength - 1; i >= 0; i--) {
-            char charAt = rollText.charAt(i);
-            int indexOf = orderList.indexOf(charAt);
-            String substring;
-//            if (TextUtils.equals("0", String.valueOf(charAt))) {// 这个情况是9变0
-                substring = orderList;
-//            } else {
-//                if (indexOf + 2 > orderList.length() - 1) {
-//                    substring = orderList;
-//                } else {
-//                    substring = orderList.substring(0, indexOf + 2);
-//                }
-//            }
+//            char charAt = rollText.charAt(i);
+//            int indexOf = orderList.indexOf(charAt);
+            String substring = orderList;
 //            Log.i("TAG", "charAt = " + charAt + "   subString = " + substring);
             rollingText(canvas, substring, i);
 //            Log.i("TAG","i = "+i+"  position = "+(finalLength-1-i)+"   chartAt = "+charAt);
@@ -160,15 +152,19 @@ public class RollingText extends View {
 
     private void begin() {
 //        Log.e("TAG","begin");
-        if (!isRollAnimEnd) {
+//        if (!isRollAnimEnd) {
+        if (count > 0) {
             postDelayed(() -> {
+                count--;
                 invalidate();
             }, 30);
         }
+//        }
     }
 
     public void start() {
         isRollAnimEnd = false;
+        count= 50;
 //        initRollText();
         begin();
     }
@@ -181,6 +177,7 @@ public class RollingText extends View {
             } else {
                 isBigger = false;
             }
+//            Log.i("TAG", "旧array = " + array.toString());
             // 新设置的数字跟之前的数字不同
             if (!TextUtils.equals(this.rollText, rollText)) {
                 int oldLength = this.rollText.length();
@@ -194,12 +191,29 @@ public class RollingText extends View {
 //                        }
                     }
 //                    Log.i("TAG",array.toString());
-                } else {
-                    // 位数不相等
-                    for (int i = newLength - 1; i >= 0; i--) {
-                        array.append(i, new AssistBean(String.valueOf(rollText.charAt(i)),i));// 记录每一个数字，好计算每个数字的平移速度
+                } else if (newLength > oldLength){//
+                    // 位数大于旧位数
+                    int dLength = newLength - oldLength;// 相差的位数
+                    for (int i = 0; i < dLength; i++) {
+                        this.rollText = "0" + this.rollText;
                     }
+                    array.clear();
+                    for (int i = 0; i < newLength; i++) {
+                        array.append(i, new AssistBean(String.valueOf(this.rollText.charAt(i)),String.valueOf(rollText.charAt(i)) ,i));
+                    }
+                }else {
+                    // 位数小于旧位数
+                    int dLength = oldLength-newLength;
+                    for (int i = 0; i < dLength; i++) {
+                        rollText = "0"+rollText;
+                    }
+                    for (int i = 0; i < oldLength; i++) {
+                        array.get(i).newText = String.valueOf(rollText.charAt(i));
+                        array.get(i).x = 0;
+                    }
+
                 }
+//                Log.i("TAG", "新array = " + array.toString());
             }
 
             this.rollText = rollText;
@@ -209,6 +223,7 @@ public class RollingText extends View {
 
     //获取设置rollText里面的最大值，及其位置
     public void getMaxWordAndPosition(String str) {
+        maxText = 0;
         int length = str.length();
         for (int i = 0; i < length; i++) {
             if (maxText < Integer.parseInt(String.valueOf(str.charAt(i)))) {
@@ -267,6 +282,12 @@ public class RollingText extends View {
             this.text = text;
         }
 
+        public AssistBean(String text, String newText, int drawTextPosition) {
+            this.text = text;
+            this.newText = newText;
+            this.drawTextPosition = drawTextPosition;
+        }
+
         public AssistBean(String text, int drawTextPosition) {
             this.text = text;
             this.drawTextPosition = drawTextPosition;
@@ -278,23 +299,13 @@ public class RollingText extends View {
         }
 
         void run() {
-            if (x >= 1) {
-                x = 1f;
-                if (maxText == Integer.parseInt(text)) {
-                    isRollAnimEnd = true;
-                }
-                if (newText != null) {
-                    text = newText;
-                }
-            } else if (x <= 0) {
-                x = 0f;
-            }
+
             switch (text) {
                 case "0":
                     // 变成"0"，要把translateY改成0，这样就能无限循环了
                     if (x == 1f) {
                         translateY = 0;
-                    }else {
+                    } else {
                         getTranslateY();
                     }
 
@@ -340,29 +351,42 @@ public class RollingText extends View {
                     x += 0.02f;
                     break;
             }
-
+            if (x +0.0005f >= 1) {
+                x = 1f;
+                if (newText != null) {
+                    text = newText;
+                }
+//                if (maxText == Integer.parseInt(text)) {
+//                    isRollAnimEnd = true;
+//                }
+            } else if (x <= 0) {
+                x = 0f;
+            }
         }
 
         private void getTranslateY() {
             if (newText == null) {
                 translateY = (int) (getFinalY(text) * getInterpolation(1.8f, x));
-            } else if (Integer.parseInt(newText) >= Integer.parseInt(text)) {// 新数比旧数大 translateY要增加
+            } else if (Integer.parseInt(newText) >= Integer.parseInt(text)) {// 新数 > 旧数
                 translateY = (int) ((getFinalY(newText) - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
 
-            } else {
+            }else if (Integer.parseInt(newText) == Integer.parseInt(text)) {// 新数 == 旧数
+                translateY = getFinalY(newText);
+            } else {// 新数 < 旧数
                 if (Integer.parseInt(newText) == 0 && Integer.parseInt(text) == 9) {// 这种情况是  9 --> 0
                     translateY = (int) ((getFinalY("10") - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
-                }else{
-                    if (Integer.parseInt(newText) < Integer.parseInt(text)){// 新数比旧数小，translateY要减小
+                } else {
+                    if (Integer.parseInt(newText) < Integer.parseInt(text)) {// 新数比旧数小，translateY要减小
                         translateY = (int) ((getFinalY(newText) - getFinalY(text)) * getInterpolation(1.8f, x)) + getFinalY(text);
 //                Log.i("TAG","减少Y = "+translateY);
                     }
                 }
             }
 
-            if (drawTextPosition == 2) {
-                Log.i("TAG","Y = "+translateY+"   x = "+x+"  text = "+text+"   newText = "+newText);
-            }
+//            if (drawTextPosition == 1) {
+                Log.i("TAG", "Y = " + translateY + "   x = " + x + "  text = " + text + "   newText = " + newText+"   drawTextPosition = "+drawTextPosition);
+//                Log.i("TAG", "drawTextPosition = " + drawTextPosition+"  text = "+text+"   newText = "+newText);
+//            }
 
         }
 
