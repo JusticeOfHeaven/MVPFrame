@@ -19,12 +19,14 @@ import com.my.mvpframe.customview.QQMessage.QQMessageActivity;
 import com.my.mvpframe.customview.breathview.BreathActivity;
 import com.my.mvpframe.customview.collsion.CollsionActivity;
 import com.my.mvpframe.customview.delete.ScrollDeleteActivity;
+import com.my.mvpframe.customview.jbox2d.Jbox2dtestActivity;
 import com.my.mvpframe.customview.pic_roll.RollViewActivity;
 import com.my.mvpframe.customview.qq_message.QQMessage1Activity;
 import com.my.mvpframe.customview.qq_message_1.DemoActivity;
 import com.my.mvpframe.customview.qq_message_2.QQMessage2Act;
 import com.my.mvpframe.customview.qq_message_3.TipsViewActivity;
 import com.my.mvpframe.customview.qq_message_4.QQMessage4Activity;
+import com.my.mvpframe.customview.recyclerView.ReActivity;
 import com.my.mvpframe.customview.rollingtext.RollingTextAct;
 import com.my.mvpframe.customview.three_d_view.ThreeDViewActivity;
 import com.my.mvpframe.utils.JsonUtils;
@@ -97,10 +99,10 @@ public class DynamicEffectActivity extends BaseActivity {
                 startActivity(new Intent(this, RollingTextAct.class));
                 break;
             case "8":
-                startActivity(new Intent(this, QQMessageActivity.class));
+                startActivity(new Intent(this, Jbox2dtestActivity.class));
                 break;
             case "9":
-                startActivity(new Intent(this, QQMessage1Activity.class));
+                startActivity(new Intent(this, ReActivity.class));
                 break;
             case "10":
                 startActivity(new Intent(this, DemoActivity.class));

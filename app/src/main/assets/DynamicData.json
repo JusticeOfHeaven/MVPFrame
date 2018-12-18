@@ -41,12 +41,12 @@
   },
   {
     "type":"8",
-    "name": "QQ消息界面",
+    "name": "弹性球界面",
     "description": ""
   },
   {
     "type":"9",
-    "name": "QQ消息界面(1)",
+    "name": "RecyclerView测试",
     "description": ""
   },
   {
