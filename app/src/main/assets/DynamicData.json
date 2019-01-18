@@ -68,5 +68,10 @@
     "type":"13",
     "name": "QQ消息界面(5)",
     "description": ""
+  },
+  {
+    "type":"14",
+    "name": "滑动弯曲选择器",
+    "description": ""
   }
 ]
