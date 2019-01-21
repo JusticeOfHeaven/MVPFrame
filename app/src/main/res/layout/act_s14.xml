@@ -6,16 +6,15 @@
     android:layout_height="match_parent">
 
 
-    <com.my.mvpframe.customview.s14.BezierSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+    <!--<com.my.mvpframe.customview.s14.BezierSeekBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="235dp"-->
+        <!--tools:ignore="MissingConstraints"-->
+        <!--tools:layout_editor_absoluteX="0dp"-->
+        <!--tools:layout_editor_absoluteY="0dp" />-->
 
     <com.my.mvpframe.customview.s14.SelectBar
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
