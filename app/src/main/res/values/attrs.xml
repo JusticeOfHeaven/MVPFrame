@@ -43,4 +43,28 @@
         <attr name="bsBar_value_selected" format="integer" />
         <attr name="bsBar_unit" format="reference|string" />
     </declare-styleable>
+    <declare-styleable name="SelectBar">
+        <attr name="sBar_textSize" format="dimension" />
+        <!--左文字间距-->
+        <attr name="sBar_leftTextDistance" format="dimension" />
+        <!--左文字-->
+        <attr name="sBar_leftText" format="string" />
+        <!--右文字间距-->
+        <attr name="sBar_rightTextDistance" format="dimension" />
+        <!--右文字-->
+        <attr name="sBar_rightText" format="string" />
+        <!--选择器个数-->
+        <attr name="sBar_circleNum" format="enum">
+            <enum name="ONE" value="1" />
+            <enum name="TWO" value="2" />
+        </attr>
+        <!--两个圆之间的间隔数-->
+        <attr name="sBar_circleApart" format="integer" />
+        <!--<attr name="bsBar_color_value_selected" format="reference|color" />-->
+        <!--<attr name="bsBar_color_bg_selected" format="reference|color" />-->
+        <!--<attr name="bsBar_value_min" format="integer" />-->
+        <!--<attr name="bsBar_value_max" format="integer" />-->
+        <!--<attr name="bsBar_value_selected" format="integer" />-->
+        <!--<attr name="bsBar_unit" format="reference|string" />-->
+    </declare-styleable>
 </resources>

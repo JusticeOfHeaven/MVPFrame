@@ -1,6 +1,7 @@
 package com.my.mvpframe.customview.s14;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,17 +13,19 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.my.mvpframe.R;
+
 /**
  * Create by jzhan on 2019/1/19
  * 弯曲滑动选择器
  */
 public class SelectBar extends View {
     // 左边的文字
-    private String leftText = "8";
+    private String leftText = "18";
     private float leftTextDistance = 100;
     private float leftTextLength;
     // 右边的文字
-    private String rightText = "28";
+    private String rightText = "35";
     private float rightTextDistance = 100;
     private float rightTextLength;
     // 滑动的text
@@ -55,6 +58,7 @@ public class SelectBar extends View {
     private Point testPoint2;
     // 针对于两个圆的情况，0 是没选，1是选的左边的圆，2是选择右边的圆
     private int select = 0;
+    private float textSize = 50;
 
     public SelectBar(Context context) {
         this(context, null);
@@ -66,7 +70,21 @@ public class SelectBar extends View {
 
     public SelectBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        initAttrs(context,attrs);
+
         init(context);
+    }
+
+    private void initAttrs(Context context, AttributeSet attrs) {
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.SelectBar);
+        this.leftText = attributes.getString(R.styleable.SelectBar_sBar_leftText);
+        this.rightText = attributes.getString(R.styleable.SelectBar_sBar_rightText);
+        this.leftTextDistance = attributes.getDimensionPixelOffset(R.styleable.SelectBar_sBar_leftTextDistance,100);
+        this.rightTextDistance = attributes.getDimensionPixelOffset(R.styleable.SelectBar_sBar_rightTextDistance,100);
+        this.circleNum = attributes.getInt(R.styleable.SelectBar_sBar_circleNum, 1);
+        this.circleApart = attributes.getInt(R.styleable.SelectBar_sBar_circleApart, 3);
+        attributes.recycle();
     }
 
     private void init(Context context) {
@@ -89,7 +107,7 @@ public class SelectBar extends View {
         // textView
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(50);
+        textPaint.setTextSize(textSize);
 
         leftTextLength = calTextWidth(leftText);
         rightTextLength = calTextWidth(rightText);
@@ -272,7 +290,7 @@ public class SelectBar extends View {
         if (sumx > 0) {
             try {
                 float v = (point.x - leftTextDistance - radius) / sumx;
-                int num = (int) ((dulX * v) + 0) + Integer.parseInt(leftText);
+                int num = (int) ((dulX * v) - 0.5) + Integer.parseInt(leftText);
                 return String.valueOf(num);
             } catch (Exception e) {
             }
