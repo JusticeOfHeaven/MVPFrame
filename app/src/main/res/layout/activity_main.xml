@@ -12,6 +12,13 @@
         android:gravity="center"
         android:layout_height="30dp"
         android:text="Hello World!" />
+    <TextView
+        android:id="@+id/newAct"
+        android:layout_alignParentRight="true"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:text="新入口" />
     <LinearLayout
         android:id="@+id/ll"
         android:layout_centerVertical="true"

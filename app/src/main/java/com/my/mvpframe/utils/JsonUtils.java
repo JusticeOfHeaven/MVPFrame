@@ -51,9 +51,9 @@ public class JsonUtils {
      * @MethodName : fromJson
      * @Description : 用来将JSON串转为对象，但此方法不可用来转带泛型的集合
      */
-    public static <T> Object fromJson(String json, Class<T> classOfT) {
+    public static <T> T fromJson(String json, Class<T> classOfT) {
         try {
-            return gson.fromJson(json, (Type) classOfT);
+            return gson.fromJson(json, classOfT);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -69,7 +69,7 @@ public class JsonUtils {
      * TypeToken<List<T>>(){}.getType()
      * ，其它类也可以用此方法调用，就是将List<T>替换为你想要转成的类
      */
-    public static Object fromJson(String json, Type typeOfT) {
+    public static <T> T fromJson(String json, Type typeOfT) {
         try {
             return gson.fromJson(json, typeOfT);
         } catch (JsonSyntaxException e) {

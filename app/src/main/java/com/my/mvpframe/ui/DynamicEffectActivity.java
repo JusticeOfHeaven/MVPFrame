@@ -56,7 +56,7 @@ public class DynamicEffectActivity extends BaseActivity {
     @Override
     protected void initView() {
         String json = getData();
-        List<DynamicBean> dynamicBeans = (List<DynamicBean>) JsonUtils.fromJson(json, new TypeToken<List<DynamicBean>>() {
+        List<DynamicBean> dynamicBeans = JsonUtils.fromJson(json, new TypeToken<List<DynamicBean>>() {
         }.getType());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
@@ -65,8 +65,8 @@ public class DynamicEffectActivity extends BaseActivity {
 
             @Override
             protected void convert(BaseViewHolder helper, DynamicBean item) {
-                helper.setText(R.id.tvTitle, item.name);
-                helper.setText(R.id.tvDescribe, item.description);
+                helper.setText(R.id.tvTitle, item.getName());
+                helper.setText(R.id.tvDescribe, item.getDescription());
 
                 helper.itemView.setOnClickListener(view -> onItemClick(item));
             }
@@ -74,7 +74,7 @@ public class DynamicEffectActivity extends BaseActivity {
     }
 
     private void onItemClick(DynamicBean bean) {
-        switch (bean.type) {
+        switch (bean.getType()) {
             case "0":
                 startActivity(new Intent(this, ThreeDViewActivity.class));
                 break;
