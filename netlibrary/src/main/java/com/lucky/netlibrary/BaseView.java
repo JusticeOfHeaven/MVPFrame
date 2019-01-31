@@ -1,4 +1,4 @@
-package com.my.mvpframe.mvp.base;
+package com.lucky.netlibrary;
 
 /**
  * Created by ZJ on 2018/1/29.

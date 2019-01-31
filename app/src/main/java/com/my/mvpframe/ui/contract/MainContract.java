@@ -1,9 +1,9 @@
 package com.my.mvpframe.ui.contract;
 
+import com.lucky.netlibrary.BasePresenter;
+import com.lucky.netlibrary.BaseView;
 import com.my.mvpframe.db.User;
 import com.my.mvpframe.db.UserDao;
-import com.my.mvpframe.mvp.base.BasePresenter;
-import com.my.mvpframe.mvp.base.BaseView;
 
 /**
  * Created by ZJ on 2018/1/29 0029.

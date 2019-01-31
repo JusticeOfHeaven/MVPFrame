@@ -1,4 +1,4 @@
-package com.my.mvpframe.mvp.base;
+package com.lucky.netlibrary;
 
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;

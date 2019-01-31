@@ -4,12 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.my.mvpframe.mvp.base.BasePresenter;
-import com.my.mvpframe.mvp.base.BaseView;
+import com.lucky.netlibrary.BasePresenter;
 import com.my.mvpframe.rxbus.RxBus;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+//import butterknife.ButterKnife;
+//import butterknife.Unbinder;
 
 /**
  * Created by ZJ on 2018/1/24.
@@ -20,7 +19,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public String TAG = getClass().getSimpleName() + "";
     private T mPresenter;
     public Context mContext;
-    private Unbinder unbinder;
+//    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         /*将Activity加入栈进行管理*/
         AppManager.getAppManager().addActivity(this);
         initActivityView(savedInstanceState);
-        unbinder = ButterKnife.bind(this);
+//        unbinder = ButterKnife.bind(this);
         mContext = BaseActivity.this;
         //创建presenter
         mPresenter = initPresenter();
@@ -73,7 +72,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         if (null != mPresenter) {
             mPresenter.detachView();
         }
-        unbinder.unbind();
+//        unbinder.unbind();
         AppManager.getAppManager().finishActivity(this);
     }
 }

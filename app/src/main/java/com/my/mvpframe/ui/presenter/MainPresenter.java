@@ -2,10 +2,10 @@ package com.my.mvpframe.ui.presenter;
 
 import android.util.Log;
 
+import com.lucky.netlibrary.BaseView;
 import com.my.mvpframe.bean.AppVersionBean;
 import com.my.mvpframe.db.User;
 import com.my.mvpframe.db.UserDao;
-import com.my.mvpframe.mvp.base.BaseView;
 import com.my.mvpframe.rxjava.BaseObserver;
 import com.my.mvpframe.rxjava.BaseSubscriber;
 import com.my.mvpframe.rxjava.RxSchedulers;
@@ -24,7 +24,7 @@ import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+//import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**

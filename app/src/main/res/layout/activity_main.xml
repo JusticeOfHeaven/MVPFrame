@@ -1,60 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.my.mvpframe.ui.MainActivity">
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="100dp"
-        android:gravity="center"
-        android:layout_height="30dp"
-        android:text="Hello World!" />
-    <TextView
-        android:id="@+id/newAct"
-        android:layout_alignParentRight="true"
-        android:layout_width="100dp"
-        android:gravity="center"
-        android:layout_height="30dp"
-        android:text="新入口" />
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_centerVertical="true"
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <TextView
-            android:id="@+id/textview1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="30dp"
-            android:text="添加第一组数据" />
-        <TextView
-            android:id="@+id/textview2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="30dp"
-            android:text="添加第二组数据" />
-    </LinearLayout>
-    <TextView
-        android:layout_below="@id/ll"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textview3"
-        android:layout_width="100dp"
-        android:gravity="center"
-        android:layout_height="30dp"
-        android:text="查询数据" />
-    <TextView
-        android:layout_below="@id/textview3"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textview4"
-        android:layout_width="100dp"
-        android:gravity="center"
-        android:layout_height="30dp"
-        android:text="跳转页面" />
 
-</RelativeLayout>
+    <com.my.mvpframe.widget.CommonTabLayout
+        android:id="@+id/commontab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

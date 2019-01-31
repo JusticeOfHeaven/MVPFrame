@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.my.mvpframe.customview.tablayout.CommonTabLayout
+    <com.my.mvpframe.widget.CommonTabLayout
         android:id="@+id/commontab"
         android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
