@@ -157,7 +157,7 @@ public class GifRender {
      */
     private void drawMovieFrame(Canvas canvas, float x, float y) {
         mMovie.setTime(mCurrentAnimationTime);
-        canvas.save(Canvas.MATRIX_SAVE_FLAG);
+//        canvas.save(Canvas.MATRIX_SAVE_FLAG);
         canvas.scale(mScale, mScale);
         //calculate x,y after scale
         mMovie.draw(canvas, (x - mMeasuredMovieWidth / 2) / mScale, (y - mMeasuredMovieHeight / 2) / mScale);

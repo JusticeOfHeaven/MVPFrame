@@ -350,7 +350,7 @@ class CommonTabLayout @JvmOverloads constructor(private val mContext: Context, a
         ta.recycle()
     }
 
-    fun setTabData(tabEntitys: ArrayList<CustomTabEntity>?) {
+    fun setTabData(tabEntitys: List<CustomTabEntity>?) {
         if (tabEntitys == null || tabEntitys.size == 0) {
             throw IllegalStateException("TabEntitys can not be NULL or EMPTY !")
         }

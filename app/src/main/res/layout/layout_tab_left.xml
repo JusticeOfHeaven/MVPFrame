@@ -25,20 +25,4 @@
             android:layout_height="wrap_content"
             android:singleLine="true"/>
     </LinearLayout>
-
-    <com.flyco.tablayout.widget.MsgView
-        android:layout_toRightOf="@+id/ll_tap"
-        android:id="@+id/rtv_msg_tip"
-        xmlns:mv="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="11.5sp"
-        android:visibility="gone"
-        mv:mv_backgroundColor="#FD481F"
-        mv:mv_isRadiusHalfHeight="true"
-        mv:mv_strokeColor="#ffffff"
-        mv:mv_strokeWidth="1dp"/>
-
 </RelativeLayout>

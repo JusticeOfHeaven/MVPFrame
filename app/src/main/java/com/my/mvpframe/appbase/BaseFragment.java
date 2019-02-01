@@ -7,10 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.my.mvpframe.mvp.base.BasePresenter;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import com.lucky.netlibrary.BasePresenter;
+
+//import butterknife.ButterKnife;
+//import butterknife.Unbinder;
 
 /**
  * Created by ZJ on 2018/1/30.
@@ -19,7 +20,7 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment {
     private View rootView;
-    private Unbinder unbinder;
+//    private Unbinder unbinder;
     private T mPresenter;
 
     @Override
@@ -34,7 +35,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         // 缓存view
         if (rootView == null)
             rootView = inflater.inflate(getLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+//        unbinder = ButterKnife.bind(this, rootView);
         //创建presenter
         mPresenter = initPresenter();
         initView();
@@ -60,7 +61,7 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
         if (null != mPresenter) {
             mPresenter.detachView();
         }
-        unbinder.unbind();
+//        unbinder.unbind();
     }
 
     @Override

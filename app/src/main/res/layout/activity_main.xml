@@ -7,6 +7,13 @@
     tools:context="com.my.mvpframe.ui.MainActivity">
 
 
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/commontab"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.my.mvpframe.widget.CommonTabLayout
         android:id="@+id/commontab"
         android:layout_width="match_parent"
