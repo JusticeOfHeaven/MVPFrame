@@ -16,8 +16,6 @@ import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
-import com.my.mvpframe.ui.MainActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 

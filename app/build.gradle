@@ -72,9 +72,9 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
     implementation 'com.airbnb.android:lottie:2.6.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    compile files('libs/jbox2d-zs-2.3.1.jar')
+    api files('libs/jbox2d-zs-2.3.1.jar')
 }
 repositories {
     mavenCentral()

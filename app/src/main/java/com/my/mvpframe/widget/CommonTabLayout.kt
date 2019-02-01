@@ -724,8 +724,8 @@ class CommonTabLayout @JvmOverloads constructor(private val mContext: Context, a
     }
 
     interface OnTabSelectListener {
-        fun onTabSelect(position: Int)
-        fun onTabReselect(position: Int)
+        fun onTabSelect(position: Int){}
+        fun onTabReselect(position: Int){}
     }
 
     interface CustomTabEntity {

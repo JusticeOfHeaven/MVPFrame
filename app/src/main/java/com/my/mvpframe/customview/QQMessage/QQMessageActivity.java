@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.my.mvpframe.R;
 import com.my.mvpframe.appbase.BaseActivity;
-import com.my.mvpframe.ui.MainActivity;
 
 /**
  * Create by jzhan on 2018/12/6

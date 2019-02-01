@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.my.mvpframe.ui.MainActivity">
+    tools:context="com.my.mvpframe.ui.home.MainActivity">
 
 
     <FrameLayout
@@ -18,7 +18,10 @@
         android:id="@+id/commontab"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tl_iconHeight="25dp"
+        app:tl_iconWidth="25dp"
+        app:tl_textSelectColor="@color/colorPrimaryDark"
+        app:tl_textUnselectColor="@color/colorAccent" />
 
 </android.support.constraint.ConstraintLayout>
