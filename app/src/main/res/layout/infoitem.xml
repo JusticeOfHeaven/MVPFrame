@@ -112,7 +112,7 @@
             android:textColor="@android:color/white"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:background="@color/red"
+            android:background="@color/red_500"
             android:clickable="true"
             android:gravity="center"
             android:text="删除" />

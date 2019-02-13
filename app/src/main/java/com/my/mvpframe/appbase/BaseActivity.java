@@ -64,7 +64,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
      */
     protected  T initPresenter(){
         return null;
-    };
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

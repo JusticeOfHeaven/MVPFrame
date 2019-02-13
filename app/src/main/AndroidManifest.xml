@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.home.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,6 +48,7 @@
         <activity android:name=".customview.s14.S14Activity" />
         <activity android:name=".ui.NewEffectActivity" />
         <activity android:name=".customview.tablayout.TabActivity" />
+        <activity android:name=".ui.activity.TestActivity" />
     </application>
 
 </manifest>

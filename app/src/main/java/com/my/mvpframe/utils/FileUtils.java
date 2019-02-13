@@ -1,6 +1,7 @@
 package com.my.mvpframe.utils;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 
 import java.io.BufferedInputStream;
@@ -40,7 +41,25 @@ public final class FileUtils {
     }
 
     /**
-     *
+     * @param fileName 文件名称，例如："DynamicData.json"
+     */
+    public static String readFromAsset(Context context, String fileName) {
+        try {
+            InputStreamReader inputReader = new InputStreamReader(context.getResources().getAssets().open(fileName));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line = "";
+            String Result = "";
+            while ((line = bufReader.readLine()) != null)
+                Result += line;
+            return Result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    /**
      * 根据文件路径获取文件
      *
      * @param filePath 文件路径
@@ -918,8 +937,8 @@ public final class FileUtils {
         }
     }
 
-/*
-    */
+    /*
+     */
 /**
  * 读取文件到字符数组中
  *
@@ -932,7 +951,7 @@ public final class FileUtils {
     }
 */
 
-/*    *//**
+    /*    *//**
      * 读取文件到字符数组中
      *
      * @param file 文件
@@ -1299,8 +1318,8 @@ public final class FileUtils {
 
     /** copy from ConvertUtils **/
 
-/*
-    */
+    /*
+     */
 /**
  * inputStream转byteArr
  *
@@ -1314,7 +1333,7 @@ public final class FileUtils {
     }
 */
 
-  /*  */
+    /*  */
     /**
      * inputStream转outputStream
      *

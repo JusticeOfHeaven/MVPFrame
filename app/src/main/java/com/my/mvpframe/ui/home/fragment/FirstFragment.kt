@@ -1,5 +1,6 @@
 package com.my.mvpframe.ui.home.fragment
 
+import android.content.Intent
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.LinearLayoutManager
 import android.util.SparseArray
@@ -12,6 +13,8 @@ import com.lucky.netlibrary.BasePresenter
 import com.lucky.netlibrary.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseFragment
+import com.my.mvpframe.ui.activity.TestActivity
+import com.my.mvpframe.ui.home.MainActivity
 import com.my.mvpframe.utils.ImageLoaderUtils
 import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -22,8 +25,7 @@ import kotlinx.android.synthetic.main.fragment_first.*
 class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
     private var isLooper = false
 
-    override val layoutId: Int
-        get() = R.layout.fragment_first
+    override val layoutId: Int = R.layout.fragment_first
 
     override fun initView() {
         val listOf = listOf(
@@ -45,18 +47,26 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
                     e.printStackTrace()
                 }
 
-                mContext?.runOnUiThread(Runnable {
+                mContext?.runOnUiThread {
                     //这里是设置当前页的下一页
                     viewPager.currentItem = viewPager.currentItem + 1
-                })
+                }
             }
         }).start()
 
-
+        var list = listOf("仿QQ空间Header任意拖拽的效果")
         recyclerView.layoutManager = LinearLayoutManager(mContext)
 
-        var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_text) {
-            override fun convert(helper: BaseViewHolder?, item: String?) {
+        var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_text, list) {
+            override fun convert(helper: BaseViewHolder, item: String) {
+                helper.setText(R.id.tvTitle, item)
+
+                helper.itemView.setOnClickListener {
+                    when (helper.adapterPosition) {
+                        //仿QQ空间Header任意拖拽的效果
+                        0 -> startActivity(Intent(activity, TestActivity::class.java))
+                    }
+                }
 
             }
 
@@ -64,9 +74,9 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
         recyclerView.adapter = adapter
     }
 
-    inner class ViewPagerAdapter(var listOf: List<String>) : PagerAdapter() {
+    inner class ViewPagerAdapter(private var listOf: List<String>) : PagerAdapter() {
 
-        var sparseArray = SparseArray<ImageView>()
+        private var sparseArray = SparseArray<ImageView>()
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val imageView = ImageView(mContext)
