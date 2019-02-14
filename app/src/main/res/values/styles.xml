@@ -3,13 +3,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/grey_500</item>
-        <item name="colorPrimaryDark">@color/grey_500</item>
+        <item name="colorPrimary">@color/blue_500</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/green_500</item>
         <item name="colorAccent">@color/grey_500</item>
-        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="HomeTheme" parent="AppTheme">
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
         <!--<item name="android:windowTranslucentNavigation">true</item>-->
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
-        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+        <!--<item name="android:statusBarColor">@android:color/white</item>-->
     </style>
 
     <style name="FullScreen" parent="AppTheme">

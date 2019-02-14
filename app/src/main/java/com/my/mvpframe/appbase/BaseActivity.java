@@ -1,8 +1,11 @@
 package com.my.mvpframe.appbase;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.lucky.netlibrary.BasePresenter;
 import com.my.mvpframe.rxbus.RxBus;
@@ -74,5 +77,25 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         }
 //        unbinder.unbind();
         AppManager.getAppManager().finishActivity(this);
+    }
+
+    /**
+     * 修改状态栏颜色，支持4.4以上版本
+     *
+     * @param colorId
+     */
+    public void setStatusBarColor(int colorId) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(colorId));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //使用SystemBarTint库使4.4版本状态栏变色，需要先将状态栏设置为透明
+//            transparencyBar(activity);
+//            SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintResource(colorId);
+        }
     }
 }
