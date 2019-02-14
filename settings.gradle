@@ -1,1 +1,1 @@
-include ':app', ':netlibrary'
+include ':app', ':netlibrary', ':swlib'
