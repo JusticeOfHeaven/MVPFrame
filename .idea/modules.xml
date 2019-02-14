@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MVPFrame.iml" filepath="$PROJECT_DIR$/MVPFrame.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/netlibrary/netlibrary.iml" filepath="$PROJECT_DIR$/netlibrary/netlibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swlib/swlib.iml" filepath="$PROJECT_DIR$/swlib/swlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smallestWidth/smallestWidth.iml" filepath="$PROJECT_DIR$/smallestWidth/smallestWidth.iml" />
     </modules>
   </component>
 </project>
