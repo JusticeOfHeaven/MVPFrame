@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:tl_iconHeight="25dp"
         app:tl_iconWidth="25dp"
-        app:tl_textSelectColor="@color/colorPrimaryDark"
-        app:tl_textUnselectColor="@color/colorAccent" />
+        app:tl_textSelectColor="@color/blue_700"
+        app:tl_textUnselectColor="@color/grey_500" />
 
 </android.support.constraint.ConstraintLayout>

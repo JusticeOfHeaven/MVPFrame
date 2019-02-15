@@ -10,12 +10,14 @@ import com.my.mvpframe.widget.CommonTabLayout
 data class TabBean(
         var name: String,
         @DrawableRes
-        var image: Int
+        var sImage: Int,
+        @DrawableRes
+        var unsImage: Int
 ):CommonTabLayout.CustomTabEntity {
         override val tabTitle: String
                 get() = name
         override val tabSelectedIcon: Int
-                get() = image
+                get() = sImage
         override val tabUnselectedIcon: Int
-                get() = image
+                get() = unsImage
 }

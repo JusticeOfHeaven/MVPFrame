@@ -36,10 +36,10 @@ class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContr
 
     override fun initView() {
         val listOf = listOf(
-                TabBean("界面1", R.drawable.unfinish),
-                TabBean("界面2", R.drawable.unfinish),
-                TabBean("界面3", R.drawable.unfinish),
-                TabBean("界面4", R.drawable.unfinish)
+                TabBean("首页", R.drawable.icon_home_s,R.drawable.icon_home_uns),
+                TabBean("界面2", R.drawable.unfinish, R.drawable.unfinish),
+                TabBean("界面3", R.drawable.unfinish, R.drawable.unfinish),
+                TabBean("界面4", R.drawable.unfinish, R.drawable.unfinish)
         )
         commontab.setTabData(listOf)
         commontab.setOnTabSelectListener(this)
