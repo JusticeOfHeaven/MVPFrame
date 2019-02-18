@@ -77,6 +77,8 @@ dependencies {
     // kotlin 协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
 
+    implementation 'com.wuyr:randomdraglayout:1.2.0'
+
     api files('libs/jbox2d-zs-2.3.1.jar')
 }
 repositories {

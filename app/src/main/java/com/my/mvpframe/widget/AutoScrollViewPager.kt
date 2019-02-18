@@ -110,8 +110,10 @@ class AutoScrollViewPager : FrameLayout {
     }
 
     private fun startCarousel(delay: Long) {
-        timer = Timer()
-        timer?.schedule(timerTask, delay, 3000)
+        if (timer == null) {
+            timer = Timer()
+            timer?.schedule(timerTask, delay, 3000)
+        }
     }
 
     /**
@@ -126,7 +128,7 @@ class AutoScrollViewPager : FrameLayout {
                     event?.actionMasked == MotionEvent.ACTION_CANCEL) {
                 startCarousel(2000)
             } else {
-                timer?.cancel()
+                stopCarousel()
             }
             false
         }
@@ -175,6 +177,7 @@ class AutoScrollViewPager : FrameLayout {
      */
     fun stopCarousel() {
         timer?.cancel()
+        timer = null
     }
 
     /*控制ViewPager切换速率的Scroller*/

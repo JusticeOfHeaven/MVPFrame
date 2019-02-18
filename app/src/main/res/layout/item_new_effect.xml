@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_300">
+
+    <ImageView
+        android:id="@+id/ivGif"
+        android:layout_width="@dimen/px_120"
+        android:layout_height="@dimen/px_160"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="@dimen/px_10"
+        android:layout_marginEnd="@dimen/px_10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/isFinish"
+        android:layout_width="@dimen/px_25"
+        android:layout_height="@dimen/px_25"
+        android:src="@drawable/finish"
+        app:layout_constraintBottom_toBottomOf="@id/ivGif"
+        app:layout_constraintRight_toRightOf="@id/ivGif" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/px_10"
+        app:layout_constraintLeft_toLeftOf="@id/ivGif"
+        app:layout_constraintRight_toRightOf="@id/ivGif"
+        app:layout_constraintTop_toBottomOf="@id/ivGif"
+        tools:text="sdfasdfasdfasd" />
+</android.support.constraint.ConstraintLayout>

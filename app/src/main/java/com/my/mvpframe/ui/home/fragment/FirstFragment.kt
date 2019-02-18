@@ -1,5 +1,7 @@
 package com.my.mvpframe.ui.home.fragment
 
+import android.content.Intent
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -7,6 +9,9 @@ import com.lucky.netlibrary.BasePresenter
 import com.lucky.netlibrary.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseFragment
+import com.my.mvpframe.ui.activity.CardActivity
+import com.my.mvpframe.ui.activity.NewEffectActivity
+import com.my.mvpframe.widget.DividerGridItemDecoration
 import kotlinx.android.synthetic.main.fragment_first.*
 
 
@@ -27,19 +32,22 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
         // 设置轮播
         autoViewPager.setData(listOf).startCarousel()
 
-        var list = listOf("动效")
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
+        var list = listOf("动效", "卡牌滑动")
+        recyclerView.layoutManager = GridLayoutManager(mContext, 3)
+        recyclerView.addItemDecoration(DividerGridItemDecoration(mContext, resources.getColor(R.color.red_600)))
 
         var adapter = object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_block, list) {
             override fun convert(helper: BaseViewHolder, item: String) {
                 helper.setText(R.id.tvTitle, item)
 
-//                helper.itemView.setOnClickListener {
-//                    when (helper.adapterPosition) {
-//                        //仿QQ空间Header任意拖拽的效果
-//                        0 -> startActivity(Intent(activity, TestActivity::class.java))
-//                    }
-//                }
+                helper.itemView.setOnClickListener {
+                    when (helper.adapterPosition) {
+                        // 动效
+                        0 -> startActivity(Intent(activity, NewEffectActivity::class.java))
+                        // 卡牌
+                        1 -> startActivity(Intent(activity, CardActivity::class.java))
+                    }
+                }
 
             }
 
@@ -50,5 +58,15 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
     override fun onDestroy() {
         super.onDestroy()
         autoViewPager.stopCarousel()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        autoViewPager.stopCarousel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        autoViewPager.startCarousel()
     }
 }

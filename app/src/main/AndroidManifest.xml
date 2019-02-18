@@ -46,9 +46,11 @@
         <activity android:name=".customview.jbox2d.Jbox2dtestActivity" />
         <activity android:name=".customview.recyclerView.ReActivity" />
         <activity android:name=".customview.s14.S14Activity" />
-        <activity android:name=".ui.NewEffectActivity" />
+        <activity android:name=".ui.activity.NewEffectActivity" />
         <activity android:name=".customview.tablayout.TabActivity" />
         <activity android:name=".ui.activity.TestActivity" />
+        <activity android:name=".ui.activity.ViewPagerActivity" />
+        <activity android:name=".ui.activity.CardActivity" />
     </application>
 
 </manifest>
