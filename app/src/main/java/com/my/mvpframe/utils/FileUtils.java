@@ -1,7 +1,12 @@
 package com.my.mvpframe.utils;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 
 
 import java.io.BufferedInputStream;
@@ -40,6 +45,29 @@ public final class FileUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
+    /**
+     * 保存图片到系统相册
+     */
+    public static void saveBitmapToGallery(Context mContext, Bitmap bitmap, File imgFile){
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(imgFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            // 这个方法系统会保存两张图片，一张在DICM，另一张在Pictures，因此不用这个，用其他方法替代
+//            MediaStore.Images.Media.insertImage(mContext.getContentResolver(), imgFile.getAbsolutePath(), path, null);
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.DATA, imgFile.getAbsolutePath());
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.Images.Media.WIDTH, bitmap.getWidth());
+            values.put(MediaStore.Images.Media.HEIGHT, bitmap.getHeight());
+            Uri uri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param fileName 文件名称，例如："DynamicData.json"
      */
