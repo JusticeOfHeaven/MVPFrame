@@ -51,6 +51,7 @@
         <activity android:name=".ui.activity.TestActivity" />
         <activity android:name=".ui.activity.ViewPagerActivity" />
         <activity android:name=".ui.activity.CardActivity" />
+        <activity android:name=".ui.activity.CalculateActivity" />
     </application>
 
 </manifest>

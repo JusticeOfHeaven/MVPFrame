@@ -9,6 +9,7 @@ import com.lucky.netlibrary.BasePresenter
 import com.lucky.netlibrary.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseFragment
+import com.my.mvpframe.ui.activity.CalculateActivity
 import com.my.mvpframe.ui.activity.CardActivity
 import com.my.mvpframe.ui.activity.NewEffectActivity
 import com.my.mvpframe.widget.DividerGridItemDecoration
@@ -32,7 +33,7 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
         // 设置轮播
         autoViewPager.setData(listOf).startCarousel()
 
-        var list = listOf("动效", "卡牌滑动")
+        var list = listOf("动效", "卡牌滑动","计算")
         recyclerView.layoutManager = GridLayoutManager(mContext, 3)
         recyclerView.addItemDecoration(DividerGridItemDecoration(mContext, resources.getColor(R.color.red_600)))
 
@@ -46,6 +47,8 @@ class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
                         0 -> startActivity(Intent(activity, NewEffectActivity::class.java))
                         // 卡牌
                         1 -> startActivity(Intent(activity, CardActivity::class.java))
+                        // 计算
+                        2 -> startActivity(Intent(activity, CalculateActivity::class.java))
                     }
                 }
 
