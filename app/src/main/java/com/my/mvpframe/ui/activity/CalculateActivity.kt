@@ -11,9 +11,11 @@ import kotlinx.android.synthetic.main.act_calculate.*
  * Create by jzhan on 2019/3/2
  */
 class CalculateActivity :BaseActivity<BaseView,BasePresenter<BaseView>>(), CalculateView.NotifyDataChanged {
-    override fun onDataChanged(k: Float, b: Float, px: DoubleArray) {
+    override fun onDataChanged(k: Float, b: Float, px: DoubleArray, y1: Float, y2: Float, percent: Float) {
         textInfo.text = "直线方程：y = $k*x "+(if (b>0) "+" else "-") + Math.abs(b)+"\n"+
-                "交点X的坐标：\nX1 = ${px[0]}  \nX2 = ${px[1]}"
+                "交点X的坐标：\nX1 = ${px[0]}  \nX2 = ${px[1]}"+"\n"+
+                "y1 = $y1   \ny2 = $y2"+"\n"+
+                "百分比：$percent"
     }
 
     override fun getLayoutId(): Int = R.layout.act_calculate

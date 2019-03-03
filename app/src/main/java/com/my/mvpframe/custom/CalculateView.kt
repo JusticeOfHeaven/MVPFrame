@@ -43,9 +43,10 @@ class CalculateView : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        var a = 400f
-        var b = 260f
-
+        // 椭圆长轴
+        val a = 400f
+        // 椭圆短轴
+        val b = 260f
 
         canvas.drawRect(width / 2f - b, height / 2f - a, width / 2f + b, height / 2f + a, mPaint)
         canvas.drawOval(width / 2f - b, height / 2f - a, width / 2f + b, height / 2f + a, mPaint)
@@ -55,9 +56,6 @@ class CalculateView : View {
         canvas.drawPoint(width / 2f, height / 2f + Math.sqrt(getDobule(a) - getDobule(b)).toFloat(), mPaint1)
         canvas.drawPoint(width / 2f, height / 2f - Math.sqrt(getDobule(a) - getDobule(b)).toFloat(), mPaint1)
 
-        val fl = calculateDistance(PointF(width / 2f, height / 2f - a), PointF(width / 2f, height / 2f + Math.sqrt(getDobule(a) - getDobule(b)).toFloat()))
-        val fl1 = calculateDistance(PointF(width / 2f, height / 2f - a), PointF(width / 2f, height / 2f - Math.sqrt(getDobule(a) - getDobule(b)).toFloat()))
-
         // 得到的直线斜率
         var k = 0f
         var e = 0f
@@ -66,21 +64,18 @@ class CalculateView : View {
             e = downY - k * downX
         }
         // 交点的坐标x
-        var a1 = (1 / getDobule(b)) + (getDobule(k) / getDobule(a))
-        var b1 = (2 * k * e / getDobule(a)) - (width / getDobule(b)) - (height * k / getDobule(a))
-        var c1 = (getDobule(width / 2f) / getDobule(b)) + (getDobule(e) / getDobule(a)) - (e * height / getDobule(a)) + (getDobule(height / 2f) / getDobule(a)) - 1
+        val a1 = (1 / getDobule(b)) + (getDobule(k) / getDobule(a))
+        val b1 = (2 * k * e / getDobule(a)) - (width / getDobule(b)) - (height * k / getDobule(a))
+        val c1 = (getDobule(width / 2f) / getDobule(b)) + (getDobule(e) / getDobule(a)) - (e * height / getDobule(a)) + (getDobule(height / 2f) / getDobule(a)) - 1
+        // 求解交点x的坐标
         getXPoint(a1, b1, c1)
-
-        notifyDataChanged?.onDataChanged(k, e, px)
-        // 求得交点的坐标
+        // 求得交点y的坐标
         val y1 = (k * px[0] + e).toFloat()
         val y2 = (k * px[1] + e).toFloat()
-//        canvas.drawPoint(px[0].toFloat(), y1, mPaint1)
-//        canvas.drawPoint(px[1].toFloat(), y2, mPaint1)
         // 排除另一个反方向的点
         var x = 0f
         var y = 0f
-        if (y1 - height / 2f <= 0 && downY - height / 2f <= 0) {
+        if (downX - width / 2f >= 0) {
             x = px[0].toFloat()
             y = y1
         } else {
@@ -89,6 +84,13 @@ class CalculateView : View {
         }
         canvas.drawPoint(x, y, mPaint1)
 
+        // 交点到椭圆圆心的距离
+        val distance = calculateDistance(x, y, width / 2f, height / 2f)
+        // 触摸点到椭圆圆心的距离
+        val distance1 = calculateDistance(downX, downY, width / 2f, height / 2f)
+        val percent = distance1 / distance
+
+        notifyDataChanged?.onDataChanged(k, e, px, y1, y2, percent)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -113,7 +115,11 @@ class CalculateView : View {
         return Math.sqrt(Math.pow(((x.x - y.x).toDouble()), 2.0) + Math.pow(((x.y - y.y).toDouble()), 2.0)).toFloat()
     }
 
-    // 一元二次方程求解
+    fun calculateDistance(startX: Float, startY: Float, endX: Float, endY: Float): Float {
+        return Math.sqrt(Math.pow(((startX - endX).toDouble()), 2.0) + Math.pow(((startY - endY).toDouble()), 2.0)).toFloat()
+    }
+
+    // 二元一次方程求解
     fun getXPoint(a: Double, b: Double, c: Double) {
         val d = Math.pow(b, 2.0) - 4 * a * c
         if (d >= 0) {
@@ -134,7 +140,7 @@ class CalculateView : View {
     var notifyDataChanged: NotifyDataChanged? = null
 
     public interface NotifyDataChanged {
-        fun onDataChanged(k: Float, b: Float, px: DoubleArray) {
+        fun onDataChanged(k: Float, b: Float, px: DoubleArray, y1: Float, y2: Float, percent: Float) {
 
         }
     }
