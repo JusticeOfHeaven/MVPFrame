@@ -6,13 +6,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
     defaultConfig {
         applicationId "com.my.mvpframe"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //指定ROOM.schemaLocation生成的文件路径
@@ -35,52 +37,62 @@ android {
 }
 
 dependencies {
-    api project(':netlibrary')
+    api project(':module_base')
     api project(':smallestWidth')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    api rootProject.ext.basedependencies["appcompatV7"]
+    api rootProject.ext.basedependencies["recyclerview"]
+    api rootProject.ext.basedependencies["constraintLayout"]
+    api rootProject.ext.basedependencies["kotlin"]
+    api rootProject.ext.basedependencies["kotlinx_coroutines"]
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    //retrofit适配器，注意是adapter-rxjava2，如果使用的是rxjava，请使用adapter-rxjava
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    //rxandroid，注意是切换到主线程使用的
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["lottie"]
+    api rootProject.ext.dependencies["BaseAdapter"]
+    api rootProject.ext.dependencies["room"]
+    annotationProcessor rootProject.ext.dependencies["room_compiler"]
+    api rootProject.ext.dependencies["room_rxjava2"]
     // butterknife
-    implementation 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    // RxLifecycle
-    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
-    //Room(Android官方主推orm框架)
-    implementation 'android.arch.persistence.room:runtime:1.0.0'
-    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
-    implementation 'android.arch.persistence.room:rxjava2:1.0.0'
-    // ROOM配套RxJava2使用
-    // glide
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
-    //    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-    // BaseAdapter
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-
-    implementation 'com.airbnb.android:lottie:2.6.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    // kotlin 协程
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
-
-    implementation 'com.wuyr:randomdraglayout:1.2.0'
+    api rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
 
     api files('libs/jbox2d-zs-2.3.1.jar')
 }
 repositories {
     mavenCentral()
+}
+
+// 文件树 进行遍历
+//fileTree('../app/') { FileTree fileTree ->
+//    fileTree.visit { FileTreeElement fileTreeElement ->
+//        println 'the file name is:' + fileTreeElement.file.name
+//    }
+//}
+
+// 例子，计算build执行时长
+def startBuildTime, endBuildTime
+this.afterEvaluate {Project project->
+    // 这个保证所有的tasks已经配置完成
+
+//    project.tasks.eachWithIndex { Task task, int i ->
+//        println 'the task name is:' + task.name
+//    }
+
+    def preBuildTask = project.tasks.getByName('preBuild')
+    preBuildTask.doFirst {
+        startBuildTime = System.currentTimeMillis()
+        println 'the start time is:' + startBuildTime
+    }
+    def buildTask = project.tasks.getByName('generateDebugSources')
+    buildTask.doLast {
+        endBuildTime = System.currentTimeMillis()
+        println 'the end time is:' + endBuildTime
+    }
+//    println "the total time is: ${endBuildTime-startBuildTime}"
 }

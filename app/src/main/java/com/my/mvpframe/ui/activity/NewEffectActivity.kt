@@ -8,8 +8,8 @@ import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.google.gson.reflect.TypeToken
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseActivity
 import com.my.mvpframe.bean.NewEffectBean
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.act_new_effect.*
 /**
  * Create by jzhan on 2019/1/28
  */
-class NewEffectActivity : BaseActivity<BaseView, BasePresenter<BaseView>>() {
+class NewEffectActivity : BaseActivity<com.my.mvpframe.module_base.net.BaseView, com.my.mvpframe.module_base.net.BasePresenter<com.my.mvpframe.module_base.net.BaseView>>() {
     lateinit var adapter: MyAdapter
     inline fun <reified T> genericType() = object : TypeToken<T>() {}.type
 
@@ -56,6 +56,7 @@ class NewEffectActivity : BaseActivity<BaseView, BasePresenter<BaseView>>() {
                     0->startActivity(Intent(this@NewEffectActivity, TabActivity::class.java))
                     1->{}
                     2->{startActivity(Intent(this@NewEffectActivity, ViewPagerActivity::class.java))}
+                    3->{startActivity(Intent(this@NewEffectActivity,DragViewActivity::class.java))}
                 }
 
             }

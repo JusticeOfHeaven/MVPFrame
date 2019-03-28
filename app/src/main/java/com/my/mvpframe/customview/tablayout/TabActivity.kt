@@ -1,10 +1,9 @@
 package com.my.mvpframe.customview.tablayout
 
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseActivity
-import kotlinx.android.synthetic.main.act_tab.*
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 
 /**
  * Create by jzhan on 2019/1/30

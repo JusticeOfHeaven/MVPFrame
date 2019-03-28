@@ -2,11 +2,10 @@ package com.my.mvpframe.ui.home.fragment
 
 import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseFragment
 import com.my.mvpframe.ui.activity.CalculateActivity
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_first.*
 /**
  * 第一个界面，先写个轮播吧
  */
-class FirstFragment : BaseFragment<BaseView, BasePresenter<BaseView>>() {
+class FirstFragment : BaseFragment<com.my.mvpframe.module_base.net.BaseView, com.my.mvpframe.module_base.net.BasePresenter<com.my.mvpframe.module_base.net.BaseView>>() {
 
     override val layoutId: Int = R.layout.fragment_first
 

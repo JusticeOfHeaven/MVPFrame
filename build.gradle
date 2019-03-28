@@ -1,15 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+apply plugin: 'kotlin'
 
 buildscript {
+    ext.kotlin_version = '1.3.21'
     ext.kotlin_version = '1.3.10'
 
+    // 配置工程的仓库地址
     repositories {
         google()
         jcenter()
     }
+
+    // 工程插件的依赖地址，这个地方是gradle项目所需要的依赖，各个project的dependencies是app需要的依赖
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,6 +24,17 @@ buildscript {
     }
 }
 
+// 不包括当前节点，只配置它的子工程subProject
+subprojects { Project project->
+//    println 'rootProject    ========>   subprojects'
+}
+
+// 配置project，参数为路径名
+project("app"){
+//    println 'rootProject    ========>   project'
+}
+
+// 配置当前工程，以及它的子工程
 allprojects {
     repositories {
         google()
@@ -26,6 +44,51 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+clean() {
     delete rootProject.buildDir
 }
+
+// 1、直接task函数创建task
+task helloTask(group:'test task',description:'task study') {
+    println "helloTask"
+    doFirst {
+        println '这个 doFirst 后执行'
+    }
+    doLast {
+
+    }
+}
+
+// 在gradle执行阶段执行，在闭包外面的先执行，在闭包里面的后执行
+helloTask.doFirst {
+    println '这个 doFirst 先执行'
+}
+
+helloTask.doLast {
+
+}
+
+// 2、通过tasks容器创建
+this.tasks.create(name: 'helloTask2'){
+    setGroup('test task')
+    setDescription('task study')
+    println "helloTask2"
+}
+

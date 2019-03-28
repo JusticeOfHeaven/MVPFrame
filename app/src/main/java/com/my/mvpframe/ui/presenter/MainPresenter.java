@@ -1,31 +1,22 @@
 package com.my.mvpframe.ui.presenter;
 
-import android.util.Log;
-
-import com.lucky.netlibrary.BaseView;
 import com.my.mvpframe.bean.AppVersionBean;
 import com.my.mvpframe.db.User;
 import com.my.mvpframe.db.UserDao;
-import com.my.mvpframe.rxjava.BaseObserver;
-import com.my.mvpframe.rxjava.BaseSubscriber;
-import com.my.mvpframe.rxjava.RxSchedulers;
-import com.my.mvpframe.rxnet.HttpCenter;
+import com.my.mvpframe.module_base.net.BaseView;
+import com.my.mvpframe.module_base.net.BaseObserver;
+import com.my.mvpframe.module_base.net.BaseSubscriber;
+import com.my.mvpframe.module_base.net.RxSchedulers;
+import com.my.mvpframe.rxnet.Re;
 import com.my.mvpframe.ui.contract.MainContract;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.List;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 //import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * Created by ZJ register 2018/1/29 0029.
@@ -41,7 +32,7 @@ public class MainPresenter extends MainContract.Presenter {
 
     @Override
     public void getAreaList() {
-        HttpCenter.getInstance().service.getGameList()
+        Re.Companion.newInstance().getService().getGameList()
                 .compose(RxSchedulers.<AppVersionBean>compose())
                 .subscribe(new BaseObserver<AppVersionBean>() {
                     @Override

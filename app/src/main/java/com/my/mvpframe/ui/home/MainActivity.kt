@@ -1,8 +1,8 @@
 package com.my.mvpframe.ui.home
 
 import android.util.Log
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseActivity
 import com.my.mvpframe.appbase.BaseFragment
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContract.View, CommonTabLayout.OnTabSelectListener {
 
     private var presenter: MainPresenter? = null
-    private var currentFragment: BaseFragment<BaseView,BasePresenter<BaseView>>? = null
+    private var currentFragment: BaseFragment<com.my.mvpframe.module_base.net.BaseView, com.my.mvpframe.module_base.net.BasePresenter<com.my.mvpframe.module_base.net.BaseView>>? = null
     private val firstFragment by lazy { FirstFragment() }
     private val secondFragment by lazy { SecondFragment() }
     private val thirdFragment by lazy { ThirdFragment() }

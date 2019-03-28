@@ -1,14 +1,13 @@
 package com.my.mvpframe.appbase;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-import com.lucky.netlibrary.BasePresenter;
-import com.my.mvpframe.rxbus.RxBus;
+import com.my.mvpframe.module_base.net.BasePresenter;
+
 
 //import butterknife.ButterKnife;
 //import butterknife.Unbinder;

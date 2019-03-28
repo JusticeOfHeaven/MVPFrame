@@ -52,6 +52,7 @@
         <activity android:name=".ui.activity.ViewPagerActivity" />
         <activity android:name=".ui.activity.CardActivity" />
         <activity android:name=".ui.activity.CalculateActivity" />
+        <activity android:name=".ui.activity.DragViewActivity" />
     </application>
 
 </manifest>

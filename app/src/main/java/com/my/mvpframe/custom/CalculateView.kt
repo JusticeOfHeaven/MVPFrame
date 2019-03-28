@@ -108,7 +108,7 @@ class CalculateView : View {
 
         notifyDataChanged?.onDataChanged(k, e, px, y1, y2, percent)
 
-        calPercentBetweenOvalAndLine(a, b, width / 2f, height / 2f, downX, downY,canvas)
+        calPercentBetweenOvalAndLine(a, b, width / 2f, height / 2f, downX, downY, canvas)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -147,10 +147,10 @@ class CalculateView : View {
      * @param downY 椭圆任意一点Y坐标
      */
     fun calPercentBetweenOvalAndLine(a: Float, b: Float, ovalX: Float, ovalY: Float,
-                                     downX: Float, downY: Float, canvas: Canvas):Float {
+                                     downX: Float, downY: Float, canvas: Canvas): Float {
         // 交点坐标
-        var x = 0f
-        var y = 0f
+        var x = 0.0
+        var y = 0.0
         var k = 0f
         var e = 0f
         var x1 = 0.0
@@ -182,33 +182,42 @@ class CalculateView : View {
 
             // 直线与椭圆的交点是两个，筛选出以椭圆原点为射点的直线与椭圆相交的点
             if (downX >= ovalX) {
-                x = x1.toFloat()
-                y = y1.toFloat()
+                x = x1
+                y = y1
             } else {
-                x = x2.toFloat()
-                y = y2.toFloat()
+                x = x2
+                y = y2
+            }
+            // 解决临近斜率趋于不存在的时候，点的抖动问题
+            // 如果小于0.25°，就直接当做斜率不存在处理
+            if (Math.cos(Math.PI / 720) < Math.abs(y - ovalY) / calculateDistance(x.toFloat(), y.toFloat(), ovalX, ovalY)) {
+                x = ovalX.toDouble()
+                if (downY >= ovalY) {
+                    y = ((ovalY + a).toDouble())
+                } else {
+                    y = ((ovalY - a).toDouble())
+                }
             }
         } else {
             // 当直线斜率不存在的时候
-            x = ovalX
+            x = ovalX.toDouble()
             if (downY >= ovalY) {
-                y = (ovalY + a)
+                y = ((ovalY + a).toDouble())
             } else {
-                y = (ovalY - a)
+                y = ((ovalY - a).toDouble())
             }
         }
 
         // 交点到椭圆圆心的距离
-        val distance = calculateDistance(x, y, ovalX, ovalY)
+        val distance = calculateDistance(x.toFloat(), y.toFloat(), ovalX, ovalY)
         // 触摸点到椭圆圆心的距离
         val distance1 = calculateDistance(downX, downY, ovalX, ovalY)
         val fl = distance1 / distance
 
-        notifyDataChanged?.onDataChanged1(x1,y1,x2,y2,x,y)
-        canvas.drawPoint(x,y,mPaint1)
+        notifyDataChanged?.onDataChanged1(x1, y1, x2, y2, x.toFloat(), y.toFloat(), Math.abs(y - ovalY) / calculateDistance(x.toFloat(), y.toFloat(), ovalX, ovalY))
+        canvas.drawPoint(x.toFloat(), y.toFloat(), mPaint1)
         return fl
     }
-
 
     // 二元一次方程求解
     fun getXPoint(a: Double, b: Double, c: Double) {
@@ -234,7 +243,8 @@ class CalculateView : View {
         fun onDataChanged(k: Float, b: Float, px: DoubleArray, y1: Float, y2: Float, percent: Float) {
 
         }
-        fun onDataChanged1(x1: Double, y1: Double, x2: Double, y2: Double, x: Float, y: Float) {
+
+        fun onDataChanged1(x1: Double, y1: Double, x2: Double, y2: Double, x: Float, y: Float, d: Double) {
 
         }
     }

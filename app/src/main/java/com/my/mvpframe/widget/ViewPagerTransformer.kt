@@ -13,17 +13,56 @@ import android.opengl.ETC1.getWidth
 /**
  * Create by jzhan on 2018/11/30
  * 自定义ViewPager切换效果
- *
+ *@param type 1
+ *            2 3d 画廊效果
  */
-class ViewPagerTransformer : ViewPager.PageTransformer {
+class ViewPagerTransformer(var type: Int = 1) : ViewPager.PageTransformer {
+
     private val TAG = "ViewPagerTransformer"
     private val MIN_SCALE = 0.75f
+
     /**
      * @param view  当前页的View
      * @param position 在当前手机屏幕能看到的页面永远为0，往左递减，往右递增，例如 -1，0，1
      */
     override fun transformPage(view: View, position: Float) {
         Log.d(TAG, "position = $position")
+        when (type) {
+            1->{
+                setTransformer(view, position)
+            }
+            2->{
+                set3DTranformer(view,position)
+            }
+
+        }
+
+    }
+    /*3d 画廊效果*/
+    private fun set3DTranformer(view: View, position: Float) {
+        val centerX = (view.width / 2).toFloat()
+        val centerY = (view.height / 2).toFloat()
+        val scaleFactor = Math.max(0.85f, 1 - Math.abs(position))
+        val rotate = 20 * Math.abs(position)
+        if (position < -1) {
+
+        } else if (position < 0) {
+            view.scaleX = scaleFactor
+            view.scaleY = scaleFactor
+            view.rotationY = rotate
+        } else if (position >= 0 && position < 1) {
+            view.scaleX = scaleFactor
+            view.scaleY = scaleFactor
+            view.rotationY = -rotate
+        } else if (position >= 1) {
+            view.scaleX = scaleFactor
+            view.scaleY = scaleFactor
+            view.rotationY = -rotate
+        }
+    }
+
+    /**/
+    private fun setTransformer(view: View, position: Float) {
         val pageWidth = view.getWidth()
         if (position < -1) { // [-Infinity,-1)
             // This page is way off-screen to the left.

@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-import com.lucky.netlibrary.BasePresenter
+import com.my.mvpframe.module_base.net.BasePresenter
 
 //import butterknife.ButterKnife;
 //import butterknife.Unbinder;
@@ -19,7 +19,7 @@ import com.lucky.netlibrary.BasePresenter
  *
  */
 
-abstract class BaseFragment<V, T : BasePresenter<V>> : Fragment() {
+abstract class BaseFragment<V, T : com.my.mvpframe.module_base.net.BasePresenter<V>> : Fragment() {
     private var rootView: View? = null
     //    private Unbinder unbinder;
     private var mPresenter: T? = null

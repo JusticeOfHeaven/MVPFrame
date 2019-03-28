@@ -1,14 +1,12 @@
 package com.my.mvpframe.ui.activity
 
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseActivity
 import com.my.mvpframe.utils.ImageLoaderUtils

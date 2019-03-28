@@ -10,15 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/px_200"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/px_12"
-        android:text="切换效果"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_200"
         app:layout_constraintTop_toBottomOf="@id/viewPager" />
-
 
 </android.support.constraint.ConstraintLayout>

@@ -1,1 +1,1 @@
-include ':app', ':netlibrary', ':smallestWidth'
+include ':app', ':smallestWidth', ':module_base', ':module_design'

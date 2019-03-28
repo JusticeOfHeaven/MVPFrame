@@ -1,16 +1,16 @@
 package com.my.mvpframe.ui.activity
 
-import com.lucky.netlibrary.BasePresenter
-import com.lucky.netlibrary.BaseView
 import com.my.mvpframe.R
 import com.my.mvpframe.appbase.BaseActivity
 import com.my.mvpframe.custom.CalculateView
+import com.my.mvpframe.module_base.net.BasePresenter
+import com.my.mvpframe.module_base.net.BaseView
 import kotlinx.android.synthetic.main.act_calculate.*
 
 /**
  * Create by jzhan on 2019/3/2
  */
-class CalculateActivity :BaseActivity<BaseView,BasePresenter<BaseView>>(), CalculateView.NotifyDataChanged {
+class CalculateActivity :BaseActivity<BaseView, BasePresenter<BaseView>>(), CalculateView.NotifyDataChanged {
     override fun onDataChanged(k: Float, b: Float, px: DoubleArray, y1: Float, y2: Float, percent: Float) {
         textInfo.text = "直线方程：y = $k*x "+(if (b>0) "+" else "-") + Math.abs(b)+"\n"+
                 "交点X的坐标：\nX1 = ${px[0]}  \nX2 = ${px[1]}"+"\n"+
@@ -18,8 +18,8 @@ class CalculateActivity :BaseActivity<BaseView,BasePresenter<BaseView>>(), Calcu
                 "百分比：$percent  \n"
     }
 
-    override fun onDataChanged1(x1: Double, y1: Double, x2: Double, y2: Double, x: Float, y: Float) {
-        textInfo1.text ="x1 = $x1\nx2 = $x2\ny1 = $y1\ny2 = $y2\nx = $x\ny = $y"
+    override fun onDataChanged1(x1: Double, y1: Double, x2: Double, y2: Double, x: Float, y: Float, d: Double) {
+        textInfo1.text ="x1 = $x1\nx2 = $x2\ny1 = $y1\ny2 = $y2\nx = $x\ny = $y\n度数：$d   1° ：${Math.cos(2*Math.PI/360)}"
     }
 
     override fun getLayoutId(): Int = R.layout.act_calculate
