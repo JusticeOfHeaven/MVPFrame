@@ -40,18 +40,14 @@ dependencies {
     api project(':module_base')
     api project(':smallestWidth')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
     api rootProject.ext.basedependencies["appcompatV7"]
     api rootProject.ext.basedependencies["recyclerview"]
     api rootProject.ext.basedependencies["constraintLayout"]
     api rootProject.ext.basedependencies["kotlin"]
     api rootProject.ext.basedependencies["kotlinx_coroutines"]
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["lottie"]
     api rootProject.ext.dependencies["BaseAdapter"]
@@ -61,8 +57,8 @@ dependencies {
     // butterknife
     api rootProject.ext.dependencies["butterknife"]
     annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
-
     api files('libs/jbox2d-zs-2.3.1.jar')
+    implementation project(':apt_lib')
 }
 repositories {
     mavenCentral()

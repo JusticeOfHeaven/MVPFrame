@@ -1,1 +1,1 @@
-include ':app', ':smallestWidth', ':module_base', ':module_design'
+include ':app', ':smallestWidth', ':module_base', ':module_design', ':apt_lib'
